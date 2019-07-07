@@ -1,13 +1,56 @@
 from django.db import models
+from ckeditor.fields import RichTextField
+
+
+
+
+class Cliente(models.Model):
+	nombre = models.CharField(max_length=60)
+	apellidos = models.CharField(max_length=60)
+	razon_social = models.CharField(max_length=60)
+	grupo = models.CharField(max_length=10)
+	dni = models.CharField(max_length=9)
+	direccion = models.CharField(max_length=50)
+	cod_postal = models.CharField(max_length=5)
+	localidad = models.CharField(max_length=30)
+	provincia = models.CharField(max_length=20)
+	pais = models.CharField(max_length=20)
+	movil = models.CharField(max_length=11)
+	email = models.CharField(max_length=60)
+	web = models.URLField(max_length=60)
+	observaciones = RichTextField(verbose_name='observaciones')
+	tarifa = models.CharField(max_length=3)
+	tipo_iva = models.SmallIntegerField(default=0)
+	descuento = models.SmallIntegerField(default=0)
+	descuento_pp = models.SmallIntegerField(default=0)
+	rec_eq = models.CharField(max_length=3)
+	cuenta_contable = models.CharField(max_length=22)
+	cuenta_ingresos = models.CharField(max_length=22)
+	cuenta_retencion = models.CharField(max_length=22)
+	cuenta_caja = models.CharField(max_length=22)
+	dias_de_pago = models.SmallIntegerField(default=0)
+	banco = models.CharField(max_length=22)
+	dir_banco = models.CharField(max_length=60)
+	ccc = models.CharField(max_length=20)
+	forma_pago = models.CharField(max_length=1)
+	medio_pago = models.CharField(max_length=20)
+	credito = models.SmallIntegerField(default=0)
+	limite_riesgo = models.SmallIntegerField(default=0)
+	liquidacion = models.SmallIntegerField(default=0)
+	comisionista = models.CharField(max_length=20)
+	comision = models.CharField(max_length=10)
+	created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de alta")
+	updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+
 
 # Create your models here.
 class Vehiculo(models.Model):
-	cod_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+	cod_cliente = models.ForeignKey(Cliente, default='0', on_delete=models.CASCADE)
 	matricula = models.CharField(max_length=7)
 	marca = models.CharField(max_length=20)
 	modelo = models.CharField(max_length=20)
 	color = models.CharField(max_length=15)
-	ficha_tecnica = models.ForeignKey(FichaTecnica, on_delete=models.CASCADE)
+	#ficha_tecnica = models.ForeignKey(FichaTecnica, on_delete=models.CASCADE)
 	kilometros = models.PositiveIntegerField(null=False)
 	bastidor = models.CharField(max_length=25)
 	asegurado = models.BooleanField()
@@ -18,6 +61,3 @@ class Vehiculo(models.Model):
 	observaciones = models.TextField()
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
-
-	class Meta:
-		ordering = [-'updated']
