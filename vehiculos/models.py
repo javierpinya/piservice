@@ -15,7 +15,7 @@ class Cliente(models.Model):
 	localidad = models.CharField(max_length=30)
 	provincia = models.CharField(max_length=20)
 	pais = models.CharField(max_length=20)
-	movil = models.CharField(max_length=11)
+	movil = models.CharField(max_length=12)
 	email = models.CharField(max_length=60)
 	web = models.URLField(max_length=60)
 	observaciones = RichTextField(verbose_name='observaciones')
@@ -42,6 +42,9 @@ class Cliente(models.Model):
 	created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de alta")
 	updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
 
+	class Meta:
+		ordering = ['-updated']
+
 
 # Create your models here.
 class Vehiculo(models.Model):
@@ -61,3 +64,62 @@ class Vehiculo(models.Model):
 	observaciones = models.TextField()
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
+
+	class Meta:
+		ordering = ['-updated']
+
+class Proveedor(models.Model):
+	nombre = models.CharField(max_length=30)
+	cif = models.CharField(max_length=10)
+	direccion = models.CharField(max_length=40)
+	persona_contacto = models.CharField(max_length=20)
+	movil = models.CharField(max_length=12)
+	email = models.CharField(max_length=30)
+	web = models.URLField(max_length=60)
+	cod_postal = models.CharField(max_length=5)
+	localidad = models.CharField(max_length=30)
+	provincia = models.CharField(max_length=20)
+	pais = models.CharField(max_length=20)
+	banco = models.CharField(max_length=22)
+	dir_banco = models.CharField(max_length=60)
+	ccc = models.CharField(max_length=20)
+	forma_pago = models.CharField(max_length=1)
+	medio_pago = models.CharField(max_length=20)
+	cuenta_contable = models.CharField(max_length=22)
+	cuenta_ingresos = models.CharField(max_length=22)
+	cuenta_retencion = models.CharField(max_length=22)
+	cuenta_caja = models.CharField(max_length=22)
+	irpf = models.IntegerField()
+	fecha_actualizacion = models.DateTimeField(auto_now=True)
+	saldo = models.IntegerField()
+	iva = models.IntegerField()
+	intracomunitario = models.BooleanField()
+	observaciones = RichTextField()
+	alarmas = models.CharField(max_length=5)
+	nueva_alarma = models.CharField(max_length=5)
+
+class Articulos(models.Model):
+	articulo = models.CharField(max_length=20)
+	descripcion = models.CharField(max_length=80)
+	cod_proveedor = models.ForeignKey(Proveedor, default='null', on_delete=models.CASCADE)
+	proveedor = models.CharField(max_length=20)
+	stock = models.IntegerField()
+	stockable = models.BooleanField()
+	fecha_compra = models.DateTimeField()
+	reservados = models.IntegerField()
+	stock_optimo = models.IntegerField()
+	pedido_proveedor = models.IntegerField()
+	observaciones = RichTextField()
+	referencia = models.CharField(max_length=20)
+	tipo = models.CharField(max_length=1)
+	marca = models.CharField(max_length=30)
+	familia = models.CharField(max_length=1)
+	subfamilia = models.CharField(max_length=1)
+	precio_compra = models.IntegerField()
+	descuento_compra = models.IntegerField()
+	precio_coste = models.IntegerField()
+	iva = models.IntegerField()
+	precio_medio = models.IntegerField()
+	precio_venta = models.IntegerField()
+	beneficio = models.IntegerField()
+	pvp_iva = models.IntegerField()
