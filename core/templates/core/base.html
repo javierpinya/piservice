@@ -27,34 +27,44 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'home' %}">Inicio</a>
               </li>
+              <!--
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'pages:pages' %}">Páginas</a>
-              </li>
+                <a class="nav-link" href="{%url 'pages:pages' }">Páginas</a>
+              </li> 
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'profiles:list' %}">Perfiles</a>
-              </li>
+                <a class="nav-link" href="{ url 'profiles:list' }">Perfiles</a>
+
+certificado provisional sustitutorio de la tarjeta sanitaria. Certificado electrónico personándose en el instituto nacional de seguridad social
+
+
+tuseguridadsocial -> asistencia sanitaria -> tienes activa la tarjeta sanitaria -> descargar pdf de certificado sustitutorio -> periodo -> 
+
+sede.seg-social.gob.es -> ciudadanos -> afiliacion e inscripción -> cambio de domicilio
+
+              </li> 
             </ul>
             <ul class="navbar-nav">
-              {% if not request.user.is_authenticated %}
+              { if not request.user.is_authenticated }
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Acceder
+                  <a class="nav-link" href="{ url 'login' }">Acceder
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'signup' %}">Registro
+                  <a class="nav-link" href="{ url 'signup' }">Registro
                   </a>
                 </li>
-              {% else %}
+              { else }
               <li class="nav-item">
-                  <a class="nav-link" href="{% url 'profile' %}">Perfil
+                  <a class="nav-link" href="{ url 'profile' }">Perfil
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'logout' %}">Salir
+                  <a class="nav-link" href="{ url 'logout' }">Salir
                   </a>
                 </li>
-              {% endif %}
+              { endif }
             </ul>
+            -->
           </div>
         </div>
       </nav>
