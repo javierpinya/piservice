@@ -1,73 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-
-
-
-class Cliente(models.Model):
-	nombre = models.CharField(max_length=60)
-	apellidos = models.CharField(max_length=60)
-	razon_social = models.CharField(max_length=60)
-	grupo = models.CharField(max_length=10)
-	dni = models.CharField(max_length=9)
-	direccion = models.CharField(max_length=50)
-	cod_postal = models.CharField(max_length=5)
-	localidad = models.CharField(max_length=30)
-	provincia = models.CharField(max_length=20)
-	pais = models.CharField(max_length=20)
-	movil = models.CharField(max_length=12)
-	email = models.CharField(max_length=60)
-	web = models.URLField(max_length=60)
-	observaciones = RichTextField(verbose_name='observaciones')
-	tarifa = models.CharField(max_length=3)
-	tipo_iva = models.SmallIntegerField(default=0)
-	descuento = models.SmallIntegerField(default=0)
-	descuento_pp = models.SmallIntegerField(default=0)
-	rec_eq = models.CharField(max_length=3)
-	cuenta_contable = models.CharField(max_length=22)
-	cuenta_ingresos = models.CharField(max_length=22)
-	cuenta_retencion = models.CharField(max_length=22)
-	cuenta_caja = models.CharField(max_length=22)
-	dias_de_pago = models.SmallIntegerField(default=0)
-	banco = models.CharField(max_length=22)
-	dir_banco = models.CharField(max_length=60)
-	ccc = models.CharField(max_length=20)
-	forma_pago = models.CharField(max_length=1)
-	medio_pago = models.CharField(max_length=20)
-	credito = models.SmallIntegerField(default=0)
-	limite_riesgo = models.SmallIntegerField(default=0)
-	liquidacion = models.SmallIntegerField(default=0)
-	comisionista = models.CharField(max_length=20)
-	comision = models.CharField(max_length=10)
-	created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de alta")
-	updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
-
-	class Meta:
-		ordering = ['-updated']
-
-
-# Create your models here.
-class Vehiculo(models.Model):
-	cod_cliente = models.ForeignKey(Cliente, default='0', on_delete=models.CASCADE)
-	matricula = models.CharField(max_length=7)
-	marca = models.CharField(max_length=20)
-	modelo = models.CharField(max_length=20)
-	color = models.CharField(max_length=15)
-	#ficha_tecnica = models.ForeignKey(FichaTecnica, on_delete=models.CASCADE)
-	kilometros = models.PositiveIntegerField(null=False)
-	bastidor = models.CharField(max_length=25)
-	asegurado = models.BooleanField()
-	aseguradora =models.CharField(max_length=50)
-	num_poliza = models.CharField(max_length=20)
-	tipo_motor = models.CharField(max_length=50)
-	placa_oval = models.CharField(max_length=15)
-	observaciones = models.TextField()
-	created = models.DateTimeField(auto_now_add=True)
-	updated = models.DateTimeField(auto_now=True)
-
-	class Meta:
-		ordering = ['-updated']
-
 class Proveedor(models.Model):
 	nombre = models.CharField(max_length=30)
 	cif = models.CharField(max_length=10)
@@ -98,7 +31,13 @@ class Proveedor(models.Model):
 	alarmas = models.CharField(max_length=5)
 	nueva_alarma = models.CharField(max_length=5)
 
-class Articulos(models.Model):
+	class Meta:
+		ordering = ['nombre']
+
+	def __str__(self):
+		return self.nombre
+
+class Articulo(models.Model):
 	articulo = models.CharField(max_length=20)
 	descripcion = models.CharField(max_length=80)
 	cod_proveedor = models.ForeignKey(Proveedor, default='null', on_delete=models.CASCADE)
@@ -124,8 +63,82 @@ class Articulos(models.Model):
 	beneficio = models.IntegerField()
 	pvp_iva = models.IntegerField()
 
+	class Meta:
+		ordering = ['articulo']
 
-class Ficha_tecnica(models.Model):
+	def __str__(self):
+		return self.articulo
+
+
+class Cliente(models.Model):
+	nombre = models.CharField(max_length=60)
+	apellidos = models.CharField(max_length=60)
+	razon_social = models.CharField(max_length=60, null=True,blank=True)
+	grupo = models.CharField(max_length=10, null=True,blank=True)
+	dni = models.CharField(max_length=9, null=True,blank=True)
+	direccion = models.CharField(max_length=50, null=True,blank=True)
+	cod_postal = models.CharField(max_length=5, null=True,blank=True)
+	localidad = models.CharField(max_length=30, null=True,blank=True)
+	provincia = models.CharField(max_length=20, null=True,blank=True)
+	pais = models.CharField(max_length=20, null=True,blank=True)
+	movil = models.CharField(max_length=12, null=True,blank=True)
+	email = models.CharField(max_length=60, null=True,blank=True)
+	web = models.URLField(max_length=60, null=True,blank=True)
+	observaciones = RichTextField(verbose_name='observaciones', null=True,blank=True)
+	tarifa = models.CharField(max_length=3, default="O", null=True,blank=True)
+	tipo_iva = models.SmallIntegerField(default=21, null=True,blank=True)
+	descuento = models.SmallIntegerField(default=0, null=True,blank=True)
+	descuento_pp = models.SmallIntegerField(default=0, null=True,blank=True)
+	rec_eq = models.CharField(max_length=3, null=True,blank=True)
+	cuenta_contable = models.CharField(max_length=22, null=True,blank=True)
+	cuenta_ingresos = models.CharField(max_length=22, null=True,blank=True)
+	cuenta_retencion = models.CharField(max_length=22, null=True,blank=True)
+	cuenta_caja = models.CharField(max_length=22, null=True,blank=True)
+	dias_de_pago = models.SmallIntegerField(default=0, null=True,blank=True)
+	banco = models.CharField(max_length=22, null=True,blank=True)
+	dir_banco = models.CharField(max_length=60, null=True,blank=True)
+	ccc = models.CharField(max_length=20, null=True,blank=True)
+	forma_pago = models.CharField(max_length=1, null=True,blank=True)
+	medio_pago = models.CharField(max_length=20, null=True,blank=True)
+	credito = models.SmallIntegerField(default=0, null=True,blank=True)
+	limite_riesgo = models.SmallIntegerField(default=0, null=True,blank=True)
+	liquidacion = models.SmallIntegerField(default=0, null=True,blank=True)
+	comisionista = models.CharField(max_length=20, null=True,blank=True)
+	comision = models.CharField(max_length=10, null=True,blank=True)
+	created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de alta")
+	updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+
+	class Meta:
+		ordering = ['-updated']
+
+	def __str__(self):
+		return self.nombre
+
+
+# Create your models here.
+class Vehiculo(models.Model):
+	cod_cliente = models.ForeignKey(Cliente, default='0', on_delete=models.CASCADE)
+	matricula = models.CharField(max_length=7)
+	marca = models.CharField(max_length=20)
+	modelo = models.CharField(max_length=20)
+	color = models.CharField(max_length=15)
+	#ficha_tecnica = models.ForeignKey(FichaTecnica, on_delete=models.CASCADE)
+	kilometros = models.PositiveIntegerField(null=False)
+	bastidor = models.CharField(max_length=25)
+	asegurado = models.BooleanField()
+	aseguradora =models.CharField(max_length=50)
+	num_poliza = models.CharField(max_length=20)
+	tipo_motor = models.CharField(max_length=50)
+	placa_oval = models.CharField(max_length=15)
+	observaciones = models.TextField()
+	created = models.DateTimeField(auto_now_add=True)
+	updated = models.DateTimeField(auto_now=True)
+
+	class Meta:
+		ordering = ['-updated']
+
+
+class Ficha_Tecnica(models.Model):
 	cod_vehiculo = models.ForeignKey(Vehiculo, default="0", on_delete=models.CASCADE)
 	matricula = models.CharField(max_length=7)
 	a1 = models.CharField(max_length=50)
