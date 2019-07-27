@@ -1,0 +1,47 @@
+@font-face{
+	font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?2edqbn');
+  src:  url('fonts/icomoon.eot?2edqbn#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?2edqbn') format('truetype'),
+    url('fonts/icomoon.woff?2edqbn') format('woff'),
+    url('fonts/icomoon.svg?2edqbn#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+	font-family: "Ubuntu-Regular";
+	src: url("fonts/Ubuntu-Light.ttf") format("truetype");
+
+}
+body{
+	font-size: 16px;
+	font-family: "Ubuntu-Regular", sans-serif;
+	background: #233D58;
+	position: relative;
+}
+
+header{
+
+	width: 100%;
+	height: 35px;
+	background: #29abe2;
+	position: relative;
+}
+
+
+@media screen and (min-width: 480px){
+	body{
+		background: red;
+	}
+}
+
+@media screen and (min-width: 600px){
+}
+
+@media screen and (min-width: 767px){
+
+}
+
+@media screen and (min-width: 950px){
+	body{
+		background: #FFFFFF;
+	}
+}

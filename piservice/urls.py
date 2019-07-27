@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from vehiculos.urls import vehiculos_patterns 
 
 urlpatterns = [
 	path('', include('core.urls')),
+	path('vehiculos/', include(vehiculos_patterns)),
     path('admin/', admin.site.urls),
 ]

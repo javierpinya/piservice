@@ -46,7 +46,7 @@ class Cliente(models.Model):
 		ordering = ['-updated']
 
 	def __str__(self):
-		return self.nombre
+		return self.apellidos
 
 
 # Create your models here.
@@ -71,6 +71,10 @@ class Vehiculo(models.Model):
 	class Meta:
 		ordering = ['-updated']
 
+"""
+	def __str__(self):
+		return self.matricula + ' - ' + self.marca + ' ' + self.modelo
+"""
 
 class Ficha_Tecnica(models.Model):
 	vehiculo = models.ForeignKey(Vehiculo, default=0, on_delete=models.CASCADE)

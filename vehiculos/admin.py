@@ -3,8 +3,10 @@ from .models import Vehiculo, Cliente
 
 # Register your models here.
 
+class VehiculoAdmin(admin.ModelAdmin):
+	list_display = ('matricula', 'marca', 'modelo', 'cliente','updated')
 
-admin.site.register(Vehiculo)
+admin.site.register(Vehiculo, VehiculoAdmin)
 
 admin.site.register(Cliente)
 #admin.site.register(Proveedor)
