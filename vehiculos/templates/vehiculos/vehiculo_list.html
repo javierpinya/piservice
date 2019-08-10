@@ -1,0 +1,20 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Vehículos{% endblock %}
+{% block content %}
+<main role="main">
+	<div class="container mb-4">
+		{% for vehiculo in vehiculos %}
+			<div class="row mt-3">
+				<div class="col-md-9 mx-auto">
+					<h2 class="mb-4">{{vehiculo.title}}</h2>
+					<div>
+						<p>{{vehiculo.content|striptags|safe|truncatechars:"200"}}</p>
+						<p><a href="{% url 'vehiculo' vehiculo.id vehiculo.title|slugify %}">Leer más</a></p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</main>
+{% endblock %}
