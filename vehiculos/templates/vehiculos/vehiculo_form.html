@@ -1,0 +1,33 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Vehículos{% endblock %}
+{% block content %}
+{% include 'vehiculos/includes/vehiculos_menu.html' %}
+<div>
+	<ul>
+		<li>
+			<form action="" method="">{% csrf_token %}
+				{{ form.as_p}}
+
+				<div>
+
+				
+					<input type="submit" value="Buscar">
+				</div>
+				
+			</form>
+		</li>
+		<li>
+			<form action="" method="post">{% csrf_token %}
+				<h3>{{title_add}}</h3>
+				<p>
+					<input type="text" name="Add" id="id_vehiculo_add" placeholder="Matrícula a añadir">
+				</p>
+				<p>
+					<input type="submit" value="Add">
+				</p>
+			</form>
+		</li>
+	</ul>
+</div>
+{% endblock %}

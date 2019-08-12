@@ -12,18 +12,54 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="{% url 'home' %}">Pi Services</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ned" aria-controls="ned" aria-expanded="false">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+  <header>
+    <h1>
+      <a href="{% url 'home' %}">
+        <figure><img src="{% static 'core/img/Pi-Star.png' %}" alt="Pi Services"></figure>
+      </a>
+      <a href="{% url 'home' %}">Pi Services</a>
+    </h1>
+    
+
+  	<nav id="ioMenu">
+      <figure id="showMenu" class="ioMenuMovil" onclick="displayMenu()"><img src="{% static 'core/img/menu.png' %}" alt="show menu"></figure>
+
+      <div id="card_menu">
+        <figure id="hideMenu" class="ioMenuMovil" onclick="displayMenu()"><img src="{% static 'core/img/exit.png' %}" alt="hide menu"></figure>
+        <figure id="logo_menu"><img src="{% static 'core/img/240-evil.png' %}" alt=""></figure>
+        <ul>
+          {% if not request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Acceder
+                  </a>
+                </li>
+          {% else %}
+            <li><a href="Nuevo Cliente">Clientes</a></li>
+            <li><a href="{% url 'vehiculos:buscar' %}">Vehículos</a></li>
+            <li><a href="Recepción Vehículo">Recepción</a></li>
+            <li><a href="Facturación">Facturación</a></li>
+            <li><a href="Almacén">Almacén</a></li>
+            <li><a href="Pedidos">Pedidos</a></li>
+            <li><a href="{% url 'logout' %}">Salir</a></li>
+          {% endif %}
+
+          
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+    <!--
+          <div class="container">
           <div class="collapse navbar-collapse" id="ned">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+                <a class="nav-link" href="{ url 'home' }">Inicio</a>
               </li>
-              <!--
+              <li class="nav-item">
+                <a class="nav-link" href="{url 'vehiculos:vehiculos' }">Vehiculos</a>
+              </li>
+              
               <li class="nav-item">
                 <a class="nav-link" href="{%url 'pages:pages' }">Páginas</a>
               </li> 
@@ -31,36 +67,57 @@
                 <a class="nav-link" href="{ url 'profiles:list' }">Perfiles</a>
               </li> 
             </ul>
+          
             <ul class="navbar-nav">
-              { if not request.user.is_authenticated }
-                <li class="nav-item">
-                  <a class="nav-link" href="{ url 'login' }">Acceder
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{ url 'signup' }">Registro
-                  </a>
-                </li>
-              { else }
-              <li class="nav-item">
-                  <a class="nav-link" href="{ url 'profile' }">Perfil
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{ url 'logout' }">Salir
-                  </a>
-                </li>
-              { endif }
+              
             </ul>
-            -->
+            
           </div>
+          { include 'vehiculos/includes/vehiculos_menu.html' }
         </div>
-      </nav>
+        -->
+      
       <!-- Contenido -->
       {% block content %}{% endblock %}
       <!-- Javascript -->
       <script src="{% static 'core/vendor/jquery/jquery.min.js' %}"></script>
       <script src="{% static 'core/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
       <script src="{% static 'core/js/main.js' %}"></script>
+
+      <script>
+        alertSize()
+        function alertSize(){
+          var myWidth =0, myHeight=0;
+          if(typeof(window.innerWidth) == 'number'){
+            myWidth = window.innerWidth;
+            myHeight = window.innerHeight;
+          }else if(document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)){
+            myWidth = document.documentElement.clientWidth;
+            myHeight = document.documentElement.clientHeight;
+          }
+
+          var display;
+          var card_menu = document.getElementById("card_menu");
+
+          display = card_menu.style.display;
+          if(myWidth<767){
+            card_menu.style.display = "none";
+          }else{
+            card_menu.style.display = "block";
+          }
+        }
+        function displayMenu() {
+          var display;
+          var card_menu = document.getElementById("card_menu");
+
+          display = card_menu.style.display;
+
+          if (display == "none"){
+            card_menu.style.display="block";
+          }else{
+            card_menu.style.display = "none";
+          }
+        }
+      </script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}{{vehiculo.matricula}}{% endblock %}
+{% block content %}
+<main role="main">
+  <div>
+    <div>
+      <div>
+        <h2>{{vehiculo.matricula}}</h2>
+        <div>
+          <p>{{vehiculo.matricula|safe}}</p>
+          <p>{{vehiculo.marca|striptags|safe|truncatechars:"200"}}</p>
+          <p>{{vehiculo.modelo|striptags|safe|truncatechars:"200"}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,47 +1,175 @@
-@font-face{
-	font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?2edqbn');
-  src:  url('fonts/icomoon.eot?2edqbn#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?2edqbn') format('truetype'),
-    url('fonts/icomoon.woff?2edqbn') format('woff'),
-    url('fonts/icomoon.svg?2edqbn#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-	font-family: "Ubuntu-Regular";
-	src: url("fonts/Ubuntu-Light.ttf") format("truetype");
-
-}
 body{
-	font-size: 16px;
-	font-family: "Ubuntu-Regular", sans-serif;
-	background: #233D58;
+	font-size:16px;
+	font-family: 'ubuntu', sans_serif;
+	background: purple;
 	position: relative;
 }
 
 header{
-
 	width: 100%;
-	height: 35px;
-	background: #29abe2;
+	height: 30px;
+	background: blue;
 	position: relative;
 }
 
+header h1{
+	display: none;
+}
+
+header nav .ioMenuMovil{
+	height: 25px;
+	width: 30px;
+	cursor: pointer;
+	line-height: 20px;
+	margin: 0px 0px 0px 10px;
+	padding-top: 5px;
+}
+
+header nav .ioMenuMovil img{
+	height: 100%;
+	
+}
+
+header nav #card_menu{
+	display: none;
+	position: relative;
+	width: 180px;
+	background: white;
+	top: -30px;
+	left: 0px;
+	border-right: 3px solid #AFAEAE;
+	z-index: 999;
+	padding-bottom: 50px;
+}
+
+header nav #card_menu #logo_menu{
+	height: 100px;
+	width: 50%;
+	margin: 30px 0px;
+	margin-left: 10%;
+	margin-bottom: 50px;
+}
+
+header nav #card_menu #logo_menu img{
+	width: 100%;
+	margin-left: 25px;
+}
+
+header nav #card_menu ul{
+	margin-top: -20px;
+}
+
+header nav #card_menu ul li{
+	list-style: none;
+	font-size: 1.5em;
+	line-height: 37px;
+}
+
+header nav #card_menu ul li a{
+	text-decoration: none;
+	color: black;
+}
 
 @media screen and (min-width: 480px){
 	body{
 		background: red;
 	}
+
 }
 
 @media screen and (min-width: 600px){
+	body{
+		background: orange;
+	}
+
 }
 
 @media screen and (min-width: 767px){
+	body{
+		background: yellow;
+	}
+	header{
+		height: 50px;		
+	}
+
+	header h1{
+		display: inline-block;
+		width: 20%;
+		margin: 0px;
+		height: 50px;
+		margin-left: 80px;
+		line-height: 50px;
+		min-width: 200px;
+	}
+
+	header h1 > *{
+		display: inline-block;
+		vertical-align: middle;
+		text-decoration: none;
+		color: white;
+		font-size: 0.8em;
+		margin: 0px 3px;
+	}
+
+	header h1 figure{
+		height: 40px;
+		width: 40px;
+		margin: 0px;
+	}
+
+	header h1 figure img{
+		width: 100%;
+	}
+
+	header nav{
+		display: inline-block;
+		vertical-align: middle;
+		width: 62%;
+		position: relative;
+	}
+
+	header nav #showMenu,
+	header nav #hideMenu{
+		display: none;
+	}
+
+	header nav #card_menu{
+		display: inline-block;
+		border: none;
+		background: none;
+		position: relative;
+		top: 0px;
+		width: 100%;
+		text-align: right;
+		padding-bottom: 0px;
+	}
+
+	header nav #card_menu figure{
+		display: none;
+	}
+
+	header nav #card_menu ul{
+		padding: 0px;
+		margin: 0px;
+		margin-top: -15px;
+	}
+	header nav #card_menu ul li{
+		display: inline-block;
+		width: 100px;
+		text-align: center;
+		font-size: 1.2em;
+		margin: 0px -2px;
+	}
+
+	header nav #card_menu ul li a{
+		color: white;
+	}
+
 
 }
 
 @media screen and (min-width: 950px){
 	body{
-		background: #FFFFFF;
+		background: green;
 	}
 }
