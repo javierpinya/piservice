@@ -51,15 +51,16 @@ class Cliente(models.Model):
 
 # Create your models here.
 class Vehiculo(models.Model):
-	cliente = models.ForeignKey(Cliente, default=0, on_delete=models.CASCADE)
+	#cliente = models.ForeignKey(Cliente, default=0, on_delete=models.CASCADE)
+	cliente = models.CharField(max_length=20)
 	matricula = models.CharField(max_length=7)
 	marca = models.CharField(max_length=20)
 	modelo = models.CharField(max_length=20)
 	color = models.CharField(max_length=15)
 	#ficha_tecnica = models.ForeignKey(FichaTecnica, on_delete=models.CASCADE)
-	kilometros = models.PositiveIntegerField(null=False)
+	kilometros = models.PositiveIntegerField(null=True)
 	bastidor = models.CharField(max_length=25)
-	asegurado = models.BooleanField()
+	asegurado = models.BooleanField(null=True)
 	aseguradora =models.CharField(max_length=50)
 	num_poliza = models.CharField(max_length=20)
 	tipo_motor = models.CharField(max_length=50)

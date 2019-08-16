@@ -2,19 +2,29 @@
 {% load static %}
 {% block title %}Vehículos{% endblock %}
 {% block content %}
+
 <main role="main">
 	<div>
-		{% for vehiculo in vehiculo_list|dictsort:"id" reversed %}
-			<div>
+
+		<form method="GET">
+
+		{{filter.form}}
+
+		<button type="submit" class="btn btn-primary">Buscar</button>
+
+		</form>
+
+		<ul>
+			{% for vehiculo in filter.qs %}
+			<li>
 				<div>
-					<h2>{{vehiculo.matricula}}</h2>
-					<div>
-						<p>{{vehiculo.matricula|striptags|safe|truncatechars:"200"}}</p>
-						<p><a href="{% url 'vehiculos:vehiculo' vehiculo.id vehiculo.modelo|slugify %}">Leer más</a></p>
-					</div>
+					<p>{{vehiculo.matricula}}</p>
+					<p>{{vehiculo.marca}}</p>
+					<p>{{vehiculo.modelo}}</p>
 				</div>
-			</div>
-		{% endfor %}
+			</li>
+			{% endfor %}
+		</ul>
 	</div>
 </main>
 {% endblock %}

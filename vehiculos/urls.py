@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import VehiculoListView, VehiculoDetailView, VehiculoSearchView
+from .views import VehiculoListView, VehiculoDetailView, VehiculoBuscar
 
 vehiculos_patterns = ([
-		path('', VehiculoListView.as_view(), name='vehiculos'),
-		path('<int:pk>/<slug:slug>/', VehiculoDetailView.as_view(), name='vehiculo'),
-		path('buscar/', VehiculoSearchView.as_view(), name="buscar"),
+		path('lista/', VehiculoListView.as_view(), name='list'),
+		path('vehiculo/<matricula>', VehiculoDetailView.as_view(), name='vehiculo'),
+		path('', VehiculoBuscar.as_view(), name="buscar"),
 	], 'vehiculos')

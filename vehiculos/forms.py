@@ -2,11 +2,12 @@ from django import forms
 from .models import Vehiculo
 
 class VehiculoForm(forms.ModelForm):
-
+	
 	class Meta:
 		model = Vehiculo
-		fields = ['matricula', 'marca', 'modelo']
+		fields = ['matricula']
 
+"""
 		widgets = {
 			'matricula': forms.TextInput(attrs={'class':'form-control','placeholder':'Matrícula'}),
 			'marca': forms.TextInput(attrs={'class':'form-control','placeholder':'Marca'}),
@@ -16,3 +17,4 @@ class VehiculoForm(forms.ModelForm):
 		labels = {
 			'matricula':'', 'marca':'', 'modelo':''
 		}
+		"""
