@@ -32,7 +32,7 @@ class Cliente(models.Model):
 
 class contabilidad_cliente(models.Model):
 
-	cliente = models.ForeignKey(Cliente, default='0', on_delete=models.CASCADE)
+	#cliente = models.ForeignKey(Cliente, null=True, on_delete=models.CASCADE)
 	tarifa = models.CharField(max_length=3, default="O", null=True,blank=True)
 	tipo_iva = models.SmallIntegerField(default=21, null=True,blank=True)
 	descuento = models.SmallIntegerField(default=0, null=True,blank=True)
@@ -54,20 +54,51 @@ class contabilidad_cliente(models.Model):
 	comisionista = models.CharField(max_length=20, null=True,blank=True)
 	comision = models.CharField(max_length=10, null=True,blank=True)
 	
+class Proveedor(models.Model):
 
+	nombre = models.CharField(max_length=30)
+	cif = models.CharField(max_length=10)
+	direccion = models.CharField(max_length=40)
+	persona_contacto = models.CharField(max_length=20)
+	movil = models.CharField(max_length=12)
+	email = models.CharField(max_length=30)
+	web = models.URLField(max_length=60)
+	cod_postal = models.CharField(max_length=5)
+	localidad = models.CharField(max_length=30)
+	provincia = models.CharField(max_length=20)
+	pais = models.CharField(max_length=20)
+	banco = models.CharField(max_length=22)
+	dir_banco = models.CharField(max_length=60)
+	ccc = models.CharField(max_length=20)
+	forma_pago = models.CharField(max_length=1)
+	medio_pago = models.CharField(max_length=20)
+	cuenta_contable = models.CharField(max_length=22)
+	cuenta_ingresos = models.CharField(max_length=22)
+	cuenta_retencion = models.CharField(max_length=22)
+	cuenta_caja = models.CharField(max_length=22)
+	irpf = models.IntegerField()
+	saldo = models.IntegerField()
+	iva = models.IntegerField()
+	intracomunitario = models.BooleanField()
+	observaciones = RichTextField()
+	alarmas = models.CharField(max_length=5)
+	nueva_alarma = models.CharField(max_length=5)
+
+	class Meta:
+		ordering = ['nombre']
+
+	def __str__(self):
+		return self.nombre
 	
-
 
 # Create your models here.
 class Vehiculo(models.Model):
 
-	cod_cliente = models.ForeignKey(Cliente, default=0, on_delete=models.CASCADE)
-	#cliente = models.CharField(max_length=20)
+	cliente = models.ForeignKey(Cliente, null=True, on_delete=models.CASCADE)
 	matricula = models.CharField(max_length=7)
 	marca = models.CharField(max_length=20)
 	modelo = models.CharField(max_length=20)
 	color = models.CharField(max_length=15)
-	#ficha_tecnica = models.ForeignKey(FichaTecnica, on_delete=models.CASCADE)
 	kilometros = models.PositiveIntegerField(null=True)
 	bastidor = models.CharField(max_length=25)
 	asegurado = models.BooleanField(null=True)
@@ -79,17 +110,14 @@ class Vehiculo(models.Model):
 	created = models.DateTimeField(auto_now_add=True, null=True)
 	updated = models.DateTimeField(auto_now=True)
 
-	class Meta:
-		ordering = ['-updated']
-
 	def __str__(self):
 		return self.matricula
 
 
+
 class Ficha_Tecnica(models.Model):
 
-	vehiculo = models.ForeignKey(Vehiculo, default=0, on_delete=models.CASCADE)
-	#matricula = models.CharField(max_length=7)
+	vehiculo = models.ForeignKey(Vehiculo, null=True, on_delete=models.CASCADE)
 	a1 = models.CharField(max_length=50)
 	a2 = models.CharField(max_length=100)
 	b1 = models.CharField(max_length=50)
@@ -175,42 +203,10 @@ class Ficha_Tecnica(models.Model):
 	libre = models.IntegerField()
 
 
-class Proveedor(models.Model):
-
-	nombre = models.CharField(max_length=30)
-	cif = models.CharField(max_length=10)
-	direccion = models.CharField(max_length=40)
-	persona_contacto = models.CharField(max_length=20)
-	movil = models.CharField(max_length=12)
-	email = models.CharField(max_length=30)
-	web = models.URLField(max_length=60)
-	cod_postal = models.CharField(max_length=5)
-	localidad = models.CharField(max_length=30)
-	provincia = models.CharField(max_length=20)
-	pais = models.CharField(max_length=20)
-	banco = models.CharField(max_length=22)
-	dir_banco = models.CharField(max_length=60)
-	ccc = models.CharField(max_length=20)
-	forma_pago = models.CharField(max_length=1)
-	medio_pago = models.CharField(max_length=20)
-	cuenta_contable = models.CharField(max_length=22)
-	cuenta_ingresos = models.CharField(max_length=22)
-	cuenta_retencion = models.CharField(max_length=22)
-	cuenta_caja = models.CharField(max_length=22)
-	irpf = models.IntegerField()
-	saldo = models.IntegerField()
-	iva = models.IntegerField()
-	intracomunitario = models.BooleanField()
-	observaciones = RichTextField()
-	alarmas = models.CharField(max_length=5)
-	nueva_alarma = models.CharField(max_length=5)
 
 
-	class Meta:
-		ordering = ['nombre']
 
-	def __str__(self):
-		return self.nombre
+
 
 
 class Articulo(models.Model):
@@ -250,8 +246,8 @@ class Articulo(models.Model):
 
 class Reparacion(models.Model):
 	
-	cod_vehiculo = models.ForeignKey(Vehiculo, default='0', on_delete=models.CASCADE)
-	cod_cliente = models.ForeignKey(Cliente, default='0', on_delete=models.CASCADE)
+	#vehiculo = models.ForeignKey(Vehiculo, null=True, on_delete=models.CASCADE)
+	cliente = models.ForeignKey(Cliente, null=True, on_delete=models.CASCADE)
 	cod_reparacion = models.IntegerField(null=True)
 	vendedor_oper = models.CharField(max_length=8)
 	observaciones = RichTextField()

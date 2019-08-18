@@ -70,6 +70,31 @@ header nav #card_menu ul li a{
 	color: black;
 }
 
+nav #card_submenu{
+	width: 100%;
+	height: 30px;
+	margin-top: 15px;
+	background: blue;
+	position: relative;
+}
+
+nav #card_submenu ul{
+	margin-top: -20px;
+}
+
+nav #card_submenu ul li{
+	list-style: none;
+	font-size: 1.5em;
+	line-height: 37px;
+}
+
+nav #card_submenu ul li a{
+	text-decoration: none;
+	color: black;
+}
+
+
+
 @media screen and (min-width: 480px){
 	body{
 		background: red;
@@ -164,6 +189,29 @@ header nav #card_menu ul li a{
 	header nav #card_menu ul li a{
 		color: white;
 	}
+
+	nav #card_submenu{
+		text-align: right;
+	}
+
+	nav #card_submenu ul{
+		padding: 0px;
+		margin: 0px;
+		margin-top: -15px;
+	}
+
+	nav #card_submenu ul li{
+		display: inline-block;
+		width: 100px;
+		text-align: center;
+		font-size: 1.2em;
+		margin: 0px -2px;
+	}
+
+	nav #card_submenu ul li a{
+		color: white;
+	}
+
 
 
 }

@@ -35,7 +35,7 @@
                 </li>
           {% else %}
             <li><a href="Nuevo Cliente">Clientes</a></li>
-            <li><a href="{% url 'vehiculos:list' %}">Vehículos</a></li>
+            <li><a href="{% url 'vehiculos:index' %}">Vehículos</a></li>
             <li><a href="Recepción Vehículo">Recepción</a></li>
             <li><a href="Facturación">Facturación</a></li>
             <li><a href="Almacén">Almacén</a></li>
@@ -49,34 +49,6 @@
     </nav>
   </header>
 
-    <!--
-          <div class="container">
-          <div class="collapse navbar-collapse" id="ned">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="{ url 'home' }">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{url 'vehiculos:vehiculos' }">Vehiculos</a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="{%url 'pages:pages' }">Páginas</a>
-              </li> 
-              <li class="nav-item">
-                <a class="nav-link" href="{ url 'profiles:list' }">Perfiles</a>
-              </li> 
-            </ul>
-          
-            <ul class="navbar-nav">
-              
-            </ul>
-            
-          </div>
-          { include 'vehiculos/includes/vehiculos_menu.html' }
-        </div>
-        -->
-      
       <!-- Contenido -->
       {% block content %}{% endblock %}
       <!-- Javascript -->
