@@ -18,3 +18,8 @@ class VehiculoForm(forms.ModelForm):
 			'matricula':'', 'marca':'', 'modelo':''
 		}
 		"""
+
+class VehiculoUpdateForm(forms.ModelForm):
+	class Meta:
+		model = Vehiculo
+		exclude = ['created']

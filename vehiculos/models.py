@@ -19,6 +19,20 @@ class Cliente(models.Model):
 	email = models.CharField(max_length=60, null=True,blank=True)
 	web = models.URLField(max_length=60, null=True,blank=True)
 	observaciones = RichTextField(verbose_name='observaciones', null=True,blank=True)
+	created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de alta", null=True)
+	updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+
+
+	class Meta:
+		ordering = ['-updated']
+
+	def __str__(self):
+		return self.apellidos
+
+
+class contabilidad_cliente(models.Model):
+
+	cliente = models.ForeignKey(Cliente, default='0', on_delete=models.CASCADE)
 	tarifa = models.CharField(max_length=3, default="O", null=True,blank=True)
 	tipo_iva = models.SmallIntegerField(default=21, null=True,blank=True)
 	descuento = models.SmallIntegerField(default=0, null=True,blank=True)
@@ -39,20 +53,16 @@ class Cliente(models.Model):
 	liquidacion = models.SmallIntegerField(default=0, null=True,blank=True)
 	comisionista = models.CharField(max_length=20, null=True,blank=True)
 	comision = models.CharField(max_length=10, null=True,blank=True)
-	created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de alta")
-	updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición")
+	
 
-	class Meta:
-		ordering = ['-updated']
-
-	def __str__(self):
-		return self.apellidos
+	
 
 
 # Create your models here.
 class Vehiculo(models.Model):
-	#cliente = models.ForeignKey(Cliente, default=0, on_delete=models.CASCADE)
-	cliente = models.CharField(max_length=20)
+
+	cod_cliente = models.ForeignKey(Cliente, default=0, on_delete=models.CASCADE)
+	#cliente = models.CharField(max_length=20)
 	matricula = models.CharField(max_length=7)
 	marca = models.CharField(max_length=20)
 	modelo = models.CharField(max_length=20)
@@ -66,7 +76,7 @@ class Vehiculo(models.Model):
 	tipo_motor = models.CharField(max_length=50)
 	placa_oval = models.CharField(max_length=15)
 	observaciones = RichTextField()
-	created = models.DateTimeField(auto_now_add=True)
+	created = models.DateTimeField(auto_now_add=True, null=True)
 	updated = models.DateTimeField(auto_now=True)
 
 	class Meta:
@@ -75,14 +85,11 @@ class Vehiculo(models.Model):
 	def __str__(self):
 		return self.matricula
 
-"""
-	def __str__(self):
-		return self.matricula + ' - ' + self.marca + ' ' + self.modelo
-"""
 
 class Ficha_Tecnica(models.Model):
+
 	vehiculo = models.ForeignKey(Vehiculo, default=0, on_delete=models.CASCADE)
-	matricula = models.CharField(max_length=7)
+	#matricula = models.CharField(max_length=7)
 	a1 = models.CharField(max_length=50)
 	a2 = models.CharField(max_length=100)
 	b1 = models.CharField(max_length=50)
@@ -167,7 +174,9 @@ class Ficha_Tecnica(models.Model):
 	reformas = models.TextField()
 	libre = models.IntegerField()
 
+
 class Proveedor(models.Model):
+
 	nombre = models.CharField(max_length=30)
 	cif = models.CharField(max_length=10)
 	direccion = models.CharField(max_length=40)
@@ -189,7 +198,6 @@ class Proveedor(models.Model):
 	cuenta_retencion = models.CharField(max_length=22)
 	cuenta_caja = models.CharField(max_length=22)
 	irpf = models.IntegerField()
-	fecha_actualizacion = models.DateTimeField(auto_now=True)
 	saldo = models.IntegerField()
 	iva = models.IntegerField()
 	intracomunitario = models.BooleanField()
@@ -197,13 +205,16 @@ class Proveedor(models.Model):
 	alarmas = models.CharField(max_length=5)
 	nueva_alarma = models.CharField(max_length=5)
 
+
 	class Meta:
 		ordering = ['nombre']
 
 	def __str__(self):
 		return self.nombre
 
+
 class Articulo(models.Model):
+
 	articulo = models.CharField(max_length=20)
 	descripcion = models.CharField(max_length=80)
 	stock = models.IntegerField()
@@ -236,9 +247,12 @@ class Articulo(models.Model):
 	def __str__(self):
 		return self.articulo
 
+
 class Reparacion(models.Model):
+	
 	cod_vehiculo = models.ForeignKey(Vehiculo, default='0', on_delete=models.CASCADE)
 	cod_cliente = models.ForeignKey(Cliente, default='0', on_delete=models.CASCADE)
+	cod_reparacion = models.IntegerField(null=True)
 	vendedor_oper = models.CharField(max_length=8)
 	observaciones = RichTextField()
 	tipo_descuento = models.CharField(max_length=3)
@@ -253,5 +267,8 @@ class Reparacion(models.Model):
 	num_presupuesto = models.CharField(max_length=12)
 	num_albaran = models.CharField(max_length=12)
 	num_factura = models.CharField(max_length=12)
+	updated = models.DateTimeField(auto_now=True)
+	created = models.DateTimeField(auto_now_add=True, null=True)
+
 
 # para la lista de reparaciones hacerlo con .html

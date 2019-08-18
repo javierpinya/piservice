@@ -7,7 +7,7 @@ from django.views.generic.base import TemplateView
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from .models import Vehiculo
-from .forms import VehiculoForm
+from .forms import VehiculoForm, VehiculoUpdateForm
 from django.urls import reverse, reverse_lazy
 from .filters import VehiculoFilter
 
@@ -35,3 +35,16 @@ class VehiculoBuscar(FormView):
 	template_name="vehiculos/vehiculo_form.html"
 	form_class = VehiculoForm
 	success_url = reverse_lazy({'vehiculos:list'})
+
+
+@method_decorator(staff_member_required, name="dispatch")
+class VehiculoUpdateView(UpdateView):
+	model = Vehiculo
+	template_name = "vehiculos/vehiculo_edit.html"
+	form_class = VehiculoUpdateForm
+	success_url = reverse_lazy('vehiculos:list')
+
+@method_decorator(staff_member_required, name="dispatch")
+class VehiculoCreateView(CreateView):
+	model = Vehiculo
+	template_name="vehiculos/vehiculo_create.html"

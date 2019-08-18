@@ -13,16 +13,17 @@
 		<button type="submit" class="btn btn-primary">Buscar</button>
 
 		</form>
-
 		<ul>
+			<th>matricula</th>
+			<th>marca</th>
+			<th>modelo</th>
 			{% for vehiculo in filter.qs %}
-			<li>
 				<div>
-					<p>{{vehiculo.matricula}}</p>
-					<p>{{vehiculo.marca}}</p>
-					<p>{{vehiculo.modelo}}</p>
+					<td>{{vehiculo.matricula}}</td>
+					<td>{{vehiculo.marca}}</td>
+					<td>{{vehiculo.modelo}}</td>
+					<td><a href="{% url 'vehiculos:editar' vehiculo.id %}">Editar</a></td>
 				</div>
-			</li>
 			{% endfor %}
 		</ul>
 	</div>
