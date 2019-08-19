@@ -32,7 +32,7 @@ class Cliente(models.Model):
 
 class contabilidad_cliente(models.Model):
 
-	#cliente = models.ForeignKey(Cliente, null=True, on_delete=models.CASCADE)
+	cliente = models.ForeignKey(Cliente, null=True, on_delete=models.CASCADE)
 	tarifa = models.CharField(max_length=3, default="O", null=True,blank=True)
 	tipo_iva = models.SmallIntegerField(default=21, null=True,blank=True)
 	descuento = models.SmallIntegerField(default=0, null=True,blank=True)
@@ -246,8 +246,7 @@ class Articulo(models.Model):
 
 class Reparacion(models.Model):
 	
-	#vehiculo = models.ForeignKey(Vehiculo, null=True, on_delete=models.CASCADE)
-	cliente = models.ForeignKey(Cliente, null=True, on_delete=models.CASCADE)
+	vehiculo = models.ForeignKey(Vehiculo, null=True, on_delete=models.CASCADE)
 	cod_reparacion = models.IntegerField(null=True)
 	vendedor_oper = models.CharField(max_length=8)
 	observaciones = RichTextField()
