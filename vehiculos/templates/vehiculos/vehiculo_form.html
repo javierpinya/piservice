@@ -4,34 +4,37 @@
 {% block content %}
 {% include 'vehiculos/includes/vehiculos_menu.html' %}
 <div>
-	<ul>
-		<li>
-			<form action="" method="post">{% csrf_token %}
-				{{form2.nombre}}
-				{{form2.apellidos}}
-				{{form2.razon_social}}
-				{{form2.grupo}}
-				{{form2.movil}}
-				{{form2.email}}
-				{{form2.web}}
-				{{form2.observaciones}}
-				{{form.matricula}}
-				{{form.marca}}
-				{{form.modelo}}
-				{{form.color}}
-				{{form.kilometros}}
-				{{form.bastidor}}
-				{{form.asegurado}}
-				{{form.aseguradora}}
-				{{form.num_poliza}}
-				{{form.tipo_motor}}
-				{{form.placa_oval}}
-				{{form.observaciones}}
-				<div>
-					<input type="submit" value="Crear Vehículo">
-				</div>
-			</form>
-		</li>
-	</ul>
+	<form action="" method="post">{% csrf_token %}
+		<div>
+			{{form2.as_p}}
+			{{form.as_p}}
+		</div>
+<!--
+		{{form2.nombre}}
+		{{form2.apellidos}}
+		{{form2.razon_social}}
+		{{form2.grupo}}
+		{{form2.movil}}
+		{{form2.email}}
+		{{form2.web}}
+		{{form2.observaciones}}
+		{{form.matricula}}
+		{{form.marca}}
+		{{form.modelo}}
+		{{form.color}}
+		{{form.kilometros}}
+		{{form.bastidor}}
+		{{form.asegurado}}
+		{{form.aseguradora}}
+		{{form.num_poliza}}
+		{{form.tipo_motor}}
+		{{form.placa_oval}}
+		{{form.observaciones}}
+	-->
+		
+		<div>
+			<input type="submit" value="Crear Vehículo">
+		</div>
+	</form>
 </div>
 {% endblock %}

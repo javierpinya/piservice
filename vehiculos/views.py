@@ -28,6 +28,11 @@ class VehiculoListView(ListView):
 
 class VehiculoDetailView(DetailView):
 	model = Vehiculo
+	template_name = "vehiculos/vehiculo_detail.html"
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		return context
 
 
 @method_decorator(staff_member_required,name="dispatch")
@@ -60,7 +65,7 @@ class VehiculoCreateView(CreateView):
 		return context
 
 	def post(self, request, *args, **kwargs):
-		self.object = self.get_object()
+		self.object = self.get_object
 		form = self.form_class(request.POST)
 		form2 = self.second_form_class(request.POST)
 		if form.is_valid() and form2.is_valid():

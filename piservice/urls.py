@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from vehiculos.urls import vehiculos_patterns
+from profiles.urls import profiles_patterns
 from django.conf import settings
 
 urlpatterns = [
 	path('', include('core.urls')),
+    path('profiles/', include(profiles_patterns)),
 	path('vehiculos/', include(vehiculos_patterns)),
     path('admin/', admin.site.urls),
     # Paths de Auth

@@ -30,8 +30,10 @@
         <ul>
           {% if not request.user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Acceder
-                  </a>
+                  <a class="nav-link" href="{% url 'login' %}">Acceder</a>
+                </li>
+                <li>
+                  <a class="nav-link" href="{% url 'signup' %}">Registro</a>
                 </li>
           {% else %}
             <li><a href="Nuevo Cliente">Clientes</a></li>
@@ -40,6 +42,7 @@
             <li><a href="Facturación">Facturación</a></li>
             <li><a href="Almacén">Almacén</a></li>
             <li><a href="Pedidos">Pedidos</a></li>
+            <li><a href="{% url 'profile' %}">Perfil</a></li>
             <li><a href="{% url 'logout' %}">Salir</a></li>
           {% endif %}
 
