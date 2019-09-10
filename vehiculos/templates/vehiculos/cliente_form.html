@@ -1,0 +1,39 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+{% include 'vehiculos/includes/vehiculos_menu.html' %}
+<div>
+	<form action="" method="post">{% csrf_token %}
+		<div>
+			{{form.as_p}}
+		</div>
+<!--
+		{{form2.nombre}}
+		{{form2.apellidos}}
+		{{form2.razon_social}}
+		{{form2.grupo}}
+		{{form2.movil}}
+		{{form2.email}}
+		{{form2.web}}
+		{{form2.observaciones}}
+		{{form.matricula}}
+		{{form.marca}}
+		{{form.modelo}}
+		{{form.color}}
+		{{form.kilometros}}
+		{{form.bastidor}}
+		{{form.asegurado}}
+		{{form.aseguradora}}
+		{{form.num_poliza}}
+		{{form.tipo_motor}}
+		{{form.placa_oval}}
+		{{form.observaciones}}
+	-->
+		
+		<div>
+			<input type="submit" value="Crear Cliente">
+		</div>
+	</form>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import VehiculoListView, VehiculoDetailView, VehiculoIndex, VehiculoUpdateView, VehiculoCreateView
+from .views import VehiculoListView, VehiculoDetailView, VehiculoIndex, VehiculoUpdateView, VehiculoCreateView, ClienteIndex, ClienteCreateView
 
 vehiculos_patterns = ([
 		path('lista/', VehiculoListView.as_view(), name='list'),
@@ -7,4 +7,6 @@ vehiculos_patterns = ([
 		path('editar/<int:pk>/', VehiculoUpdateView.as_view(), name='editar'),
 		path('index/', VehiculoIndex.as_view(), name='index'),
 		path('create/', VehiculoCreateView.as_view(), name="crear"),
+		path('cliente_index/', ClienteIndex.as_view(), name="cliente_index"),
+		path('nuevo_cliente/', ClienteCreateView.as_view(), name="nuevo_cliente"),
 	], 'vehiculos')

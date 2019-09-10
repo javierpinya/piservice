@@ -36,7 +36,7 @@
                   <a class="nav-link" href="{% url 'signup' %}">Registro</a>
                 </li>
           {% else %}
-            <li><a href="Nuevo Cliente">Clientes</a></li>
+            <li><a href="{% url 'vehiculos:cliente_index' %}">Clientes</a></li>
             <li><a href="{% url 'vehiculos:index' %}">Vehículos</a></li>
             <li><a href="Recepción Vehículo">Recepción</a></li>
             <li><a href="Facturación">Facturación</a></li>

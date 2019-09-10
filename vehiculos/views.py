@@ -75,3 +75,32 @@ class VehiculoCreateView(CreateView):
 			return HttpResponseRedirect(self.get_success_url())
 		else:
 			return self.render_to_response(self.get_context_data(form=form, form2=form2))
+
+@method_decorator(staff_member_required, name="dispatch")
+class ClienteIndex(ListView):
+	model = Vehiculo
+	template_name = "vehiculos/cliente_index.html"
+
+@method_decorator(staff_member_required, name="dispatch")
+class ClienteCreateView(CreateView):
+	model = Vehiculo
+	template_name = "vehiculos/cliente_form.html"
+	form_class = ClienteForm
+	success_url = reverse_lazy('vehiculos:cliente_index')
+
+
+	def get_context_data(self, **kwargs):
+	    context = super(ClienteCreateView, self).get_context_data(**kwargs)
+	    if 'form' not in context:
+	    	context['form'] = self.form_class(self.request.POST)
+	    return context
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		form = self.form_class(request.POST)
+		if form.is_valid():
+			solicitud = form.save()
+			"""ojo, si hay que añadir un segundo form, copiar el método de vehiculocreateview"""
+			return HttpResponseRedirect(self.get_success_url())
+		else:
+			return self.render_to_response(self.get_context_data(form=form))
