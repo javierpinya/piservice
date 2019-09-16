@@ -1,0 +1,68 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+{% include 'vehiculos/includes/vehiculos_menu.html' %}
+<div>
+	<form method="GET">
+
+		{{filter.form}}
+
+		<button type="submit" class="btn btn-primary">Buscar</button>
+
+		</form>
+		<div>
+			{{form2.as_p}}
+			{{form.as_p}}
+		</div>
+		<!--
+			"""
+		<ul>
+			<th>DNI</th>
+			<th>Nombre</th>
+			<th>Apellidos</th>
+			<th>Grupo</th>
+			<th>Código Postal</th>
+			<th>Dirección</th>
+			<th>Localidad</th>
+			<th>Provincia</th>
+			<th>País</th>
+			<th>Tfno Móvil</th>
+			<th>Email</th>
+			<th>Web</th>
+			<th>Fecha Alta</th>
+			<th>Fecha Modificación</th>
+			<th>Observaciones</th>
+			<th>Cliente_FK</th>
+			<th>matricula</th>
+			<th>marca</th>
+			<th>modelo</th>
+			{% for cliente in filter.qs %}
+				<div>
+					<td>{{cliente.dni}}</td>
+					<td>{{cliente.nombre}}</td>
+					<td>{{cliente.apellidos}}</td>
+					<td>{{cliente.grupo}}</td>
+					<td>{{cliente.cod_postal}}</td>
+					<td>{{cliente.direccion}}</td>
+					<td>{{cliente.localidad}}</td>
+					<td>{{cliente.provincia}}</td>
+					<td>{{cliente.pais}}</td>
+					<td>{{cliente.movil}}</td>
+					<td>{{cliente.email}}</td>
+					<td>{{cliente.web}}</td>
+					<td>{{cliente.created}}</td>
+					<td>{{cliente.updated}}</td>
+					<td>{{cliente.observaciones}}</td>
+					<td>{{vehiculo.cliente}}</td>
+					<td>{{vehiculo.matricula}}</td>
+					<td>{{vehiculo.marca}}</td>
+					<td>{{vehiculo.modelo}}</td>
+					<td><a href="#">Editar</a></td>
+				</div>
+			{% endfor %}
+		</ul>
+		"""
+	-->
+</div>
+{% endblock %}

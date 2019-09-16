@@ -97,9 +97,9 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'piserviceDB',
-        'USER': 'postgres',
-        'PASSWORD':'root',
+        'NAME': 'piservicedb',
+        'USER': 'javier',
+        'PASSWORD':'2Lechugas?',
         'HOST':'localhost',
         'PORT': 5432,
     }

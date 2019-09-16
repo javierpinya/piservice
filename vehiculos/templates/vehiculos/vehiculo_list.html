@@ -14,11 +14,13 @@
 
 		</form>
 		<ul>
+			<th>cliente</th>
 			<th>matricula</th>
 			<th>marca</th>
 			<th>modelo</th>
 			{% for vehiculo in filter.qs %}
 				<div>
+					<td>{{vehiculo.cliente}}</td>
 					<td>{{vehiculo.matricula}}</td>
 					<td>{{vehiculo.marca}}</td>
 					<td>{{vehiculo.modelo}}</td>

@@ -6,10 +6,10 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from django.views.generic.base import TemplateView
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
-from .models import Vehiculo
+from .models import Vehiculo, Cliente
 from .forms import ClienteForm, VehiculoForm, VehiculoUpdateForm
 from django.urls import reverse, reverse_lazy
-from .filters import VehiculoFilter
+from .filters import VehiculoFilter, ClienteFilter
 
 class StaffRequiredMixin(object):
 
@@ -104,3 +104,41 @@ class ClienteCreateView(CreateView):
 			return HttpResponseRedirect(self.get_success_url())
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
+
+class ClienteListView(ListView):
+	model = Cliente
+	template_name = "vehiculos/cliente_list.html"
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['filter'] = ClienteFilter(self.request.GET, queryset=self.get_queryset())
+		return context
+
+@method_decorator(staff_member_required, name="dispatch")
+class ClienteVehiculoListView(ListView):
+	model = Cliente
+	template_name="vehiculos/cliente_vehiculo_list.html"
+	form_class = ClienteForm
+	second_form_class = VehiculoForm
+	success_url = reverse_lazy('vehiculos:index')
+
+	def get_context_data(self, **kwargs):
+		context = super(ClienteVehiculoListView, self).get_context_data(**kwargs)
+		context['filter'] = ClienteFilter(self.request.GET, queryset=self.get_queryset())
+		if 'form' not in context:
+			context['form'] = self.form_class(self.request.POST)
+		if 'form2' not in context:
+			context['form2'] = self.second_form_class(self.request.POST)
+		return context
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		form = self.form_class(request.POST)
+		form2 = self.second_form_class(request.POST)
+		if form.is_valid() and form2.is_valid():
+			solicitud = form.save(commit=False)
+			solicitud.vehiculo = form2.save()
+			solicitud.save()
+			return HttpResponseRedirect(self.get_success_url())
+		else:
+			return self.render_to_response(self.get_context_data(form=form, form2=form2))

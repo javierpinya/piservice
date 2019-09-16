@@ -10,7 +10,8 @@
 		  <div id="card_submenu">
 		    <ul>
 		    	<li><a href="{% url 'vehiculos:nuevo_cliente' %}">Nuevo</a></li>
-		    	<li><a href="bucar_cliente">Buscar</a></li>
+		    	<li><a href="{% url 'vehiculos:buscar_cliente' %}">Buscar</a></li>
+		    	<li><a href="{% url 'vehiculos:buscar_cliente_vehiculo' %}">Avanzado</a></li>
 		    </ul>
 		  </div>
 		</nav>
