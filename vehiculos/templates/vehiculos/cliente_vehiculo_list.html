@@ -6,15 +6,14 @@
 <div>
 	<form method="GET">
 
-		{{filter.form}}
+		{{filter.form.as_p}}
 
 		<button type="submit" class="btn btn-primary">Buscar</button>
 
 		</form>
-		<div>
-			{{form2.as_p}}
-			{{form.as_p}}
-		</div>
+		{% for obj in filter.qs %}
+			{{obj.cliente}} - {{ obj.matricula }}
+		{% endfor %}
 		<!--
 			"""
 		<ul>

@@ -14,7 +14,15 @@ class VehiculoFilter(django_filters.FilterSet):
 
 class ClienteFilter(django_filters.FilterSet):
 
+#	matricula = django_filters.CharFilter()
+#	cliente__apellidos = django_filters.CharFilter(lookup_expr='icontains')
+
 	class Meta:
-		model = Cliente
-		fields = {'apellidos':['icontains'],
+		model = Vehiculo
+		fields = {'matricula':['icontains'],
+					'cliente__apellidos':['icontains']
 				}
+
+	"""vamos a probar a hacer aquí un filtro compuesto:"""
+	#def filter_compuesto(self, queryset, name, value):
+	""" no creo que sea aquí... mirar curso django de Angie en youtube"""

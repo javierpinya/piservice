@@ -121,5 +121,5 @@ class ClienteVehiculoListView(ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['filter'] = VehiculoFilter(self.request.GET, queryset=self.get_queryset())
+		context['filter'] = ClienteFilter(self.request.GET, queryset=self.get_queryset())
 		return context
