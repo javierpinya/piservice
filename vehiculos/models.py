@@ -27,8 +27,7 @@ class Cliente(models.Model):
 		ordering = ['-updated']
 
 	def __str__(self):
-		cadena = self.apellidos + self.nombre
-		return cadena
+		return self.apellidos
 
 
 class contabilidad_cliente(models.Model):

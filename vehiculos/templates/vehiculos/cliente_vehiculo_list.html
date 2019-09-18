@@ -10,10 +10,10 @@
 
 		<button type="submit" class="btn btn-primary">Buscar</button>
 
-		</form>
-		{% for obj in filter.qs %}
-			{{obj.cliente}} - {{ obj.matricula }}
-		{% endfor %}
+	</form>
+	{% for vehiculo in filter.qs %}
+		{{vehiculo.cliente.email}} - {{ vehiculo.matricula }}
+	{% endfor %}
 		<!--
 			"""
 		<ul>
