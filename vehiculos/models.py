@@ -1,10 +1,14 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-
+def custom_upload_to(instance, filename):
+	old_instance = Profile.objects.get(pk=instance.pk)
+	old_intance.avatar.delete()
+	return'profiles/' + filename
 
 
 class Cliente(models.Model):
+	avatar = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
 	nombre = models.CharField(max_length=60)
 	apellidos = models.CharField(max_length=60)
 	razon_social = models.CharField(max_length=60, null=True,blank=True)

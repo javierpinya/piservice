@@ -1,0 +1,18 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Perfil_cliente{% endblock %}
+{% block content %}
+
+<main role="main">
+	<div>
+		<h2>Perfiles</h2>
+		<div class="row">
+			{% for profile in profile_list %}
+			<p>{{profile.dni}} - {{profile.nombre}} - {{profile.apellidos}}<br>
+				<a href="{% url 'profiles:detail' profile.dni %}">Ver perfil</a>
+			</p>
+		</div>
+	</div>
+
+
+{% endblock %}

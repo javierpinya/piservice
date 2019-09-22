@@ -31,23 +31,15 @@
 			<th>Observaciones</th>
 			{% for cliente in filter.qs %}
 				<div>
+					{% if cliente.avatar %}
+						<img src="{{cliente.avatar.url}}">
+					{% else %}
+						<img src="{% static 'vehiculos/img/avatar.png' %}">
+					{% endif %}
 					<td>{{cliente.dni}}</td>
 					<td>{{cliente.nombre}}</td>
 					<td>{{cliente.apellidos}}</td>
-					<td>{{cliente.grupo}}</td>
-					<td>{{cliente.cod_postal}}</td>
-					<td>{{cliente.direccion}}</td>
-					<td>{{cliente.localidad}}</td>
-					<td>{{cliente.provincia}}</td>
-					<td>{{cliente.pais}}</td>
-					<td>{{cliente.movil}}</td>
-					<td>{{cliente.email}}</td>
-					<td>{{cliente.web}}</td>
-					<td>{{cliente.created}}</td>
-					<td>{{cliente.updated}}</td>
-					<td>{{cliente.observaciones}}</td>
-					
-					<td><a href="#">Editar</a></td>
+					<td><a href="{% url 'profiles:detail' cliente.dni %}">Ver Perfil</a></td>
 				</div>
 			{% endfor %}
 		</ul>

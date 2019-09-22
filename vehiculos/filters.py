@@ -13,6 +13,15 @@ class VehiculoFilter(django_filters.FilterSet):
 				}
 
 class ClienteFilter(django_filters.FilterSet):
+	class Meta:
+		model = Cliente
+		fields = {'nombre':['icontains'],
+					'apellidos': ['icontains'],
+					'dni': ['icontains'],
+					'movil': ['icontains'],
+		}
+
+class ClienteVehiculoFilter(django_filters.FilterSet):
 
 	class Meta:
 		model = Vehiculo

@@ -1,0 +1,33 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}{{cliente.nombre }} {{cliente.apellidos}}{% endblock %}
+{% block content %}
+
+<main role="main">
+	<div>
+		HOLA soy el detalle. Aquí hay que poner el perfil del cliente y un listado de sus vehículos con un enlace a su historial, así como la posibilidad de abrir una orden de reparación sobre un determinado vehículo. Para poner un listado de vehículos habría que hacer un nuevo filtro, vista, etc. Como estamos utilizando Cliente, en vez de Vehiculo, y éste no tiene un Foreign key hacia vehículos, tendremos que crear nuevas vistas y filtros...
+			<div>
+				{% if cliente.avatar %}
+					<img src="{{cliente.avatar.url}}">
+				{% else %}
+					<img src="{% static 'vehiculos/img/avatar.png' %}">
+				{% endif %}
+				<td>{{cliente.dni}}</td>
+				<td>{{cliente.nombre}}</td>
+				<td>{{cliente.apellidos}}</td>
+				<td>{{cliente.grupo}}</td>
+				<td>{{cliente.cod_postal}}</td>
+				<td>{{cliente.direccion}}</td>
+				<td>{{cliente.localidad}}</td>
+				<td>{{cliente.provincia}}</td>
+				<td>{{cliente.pais}}</td>
+				<td>{{cliente.movil}}</td>
+				<td>{{cliente.email}}</td>
+				<td>{{cliente.web}}</td>
+				<td>{{cliente.created}}</td>
+				<td>{{cliente.updated}}</td>
+				<td>{{cliente.observaciones}}</td>
+	</div>
+
+
+{% endblock %}
