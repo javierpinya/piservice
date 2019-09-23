@@ -1,35 +1,35 @@
 {% extends 'core/base_real.html' %}
 {% load static %}
-{% block title %}{{vehiculo.cliente.nombre }} {{vehiculo.cliente.apellidos}}{% endblock %}
+{% block title %}{{cliente.nombre }} {{cliente.apellidos}}{% endblock %}
 {% block content %}
 
 <main role="main">
 	<div>
 		HOLA soy el detalle. Aquí hay que poner el perfil del cliente y un listado de sus vehículos con un enlace a su historial, así como la posibilidad de abrir una orden de reparación sobre un determinado vehículo. Para poner un listado de vehículos habría que hacer un nuevo filtro, vista, etc. Como estamos utilizando Cliente, en vez de Vehiculo, y éste no tiene un Foreign key hacia vehículos, tendremos que crear nuevas vistas y filtros...
 			<div>
-				{% if vehiculo.cliente.avatar %}
-					<img src="{{vehiculo.cliente.avatar.url}}">
+				{% if cliente.avatar %}
+					<img src="{{cliente.avatar.url}}">
 				{% else %}
 					<img src="{% static 'vehiculos/img/avatar.png' %}">
 				{% endif %}
-				<td>{{vehiculo.cliente.dni}}</td>
-				<td>{{vehiculo.cliente.nombre}}</td>
-				<td>{{vehiculo.cliente.apellidos}}</td>
-				<td>{{vehiculo.cliente.grupo}}</td>
-				<td>{{vehiculo.cliente.cod_postal}}</td>
-				<td>{{vehiculo.cliente.direccion}}</td>
-				<td>{{vehiculo.cliente.localidad}}</td>
-				<td>{{vehiculo.cliente.provincia}}</td>
-				<td>{{vehiculo.cliente.pais}}</td>
-				<td>{{vehiculo.cliente.movil}}</td>
-				<td>{{vehiculo.cliente.email}}</td>
-				<td>{{vehiculo.cliente.web}}</td>
-				<td>{{vehiculo.cliente.created}}</td>
-				<td>{{vehiculo.cliente.updated}}</td>
-				<td>{{vehiculo.cliente.observaciones}}</td>
-				<td>{{vehiculo.matricula}}</td>
-				<td>{{vehiculo.modelo}}</td>
-				<td>{{vehiculo.kilometros}}</td>
+				<td>{{cliente.dni}}</td>
+				<td>{{cliente.nombre}}</td>
+				<td>{{cliente.apellidos}}</td>
+				<td>{{cliente.grupo}}</td>
+				<td>{{cliente.cod_postal}}</td>
+				<td>{{cliente.direccion}}</td>
+				<td>{{cliente.localidad}}</td>
+				<td>{{cliente.provincia}}</td>
+				<td>{{cliente.pais}}</td>
+				<td>{{cliente.movil}}</td>
+				<td>{{cliente.email}}</td>
+				<td>{{cliente.web}}</td>
+				<td>{{cliente.created}}</td>
+				<td>{{cliente.updated}}</td>
+				<td>{{cliente.observaciones}}</td>
+				<td>{{cliente.vehiculo.matricula}}</td>
+				<td>{{cliente.vehiculo.modelo}}</td>
+				<td>{{cliente.vehiculo.kilometros}}</td>
 
 	</div>
 

@@ -11,8 +11,27 @@
 		<button type="submit" class="btn btn-primary">Buscar</button>
 
 	</form>
-	{% for vehiculo in filter.qs %}
-		{{vehiculo.cliente.email}} - {{ vehiculo.matricula }}
+	{% for cliente in filter.qs %}
+		<div>
+			<h2>Perfil</h2>
+			{% if cliente.avatar %}
+				<img src="{{cliente.avatar.url}}">
+			{% else %}
+				<img src="{% static 'vehiculos/img/avatar.png' %}">
+			{% endif %}
+			<td>{{cliente.dni}}</td>
+			<td>{{cliente.nombre}}</td>
+			<td>{{cliente.apellidos}}</td>
+			<td>{{cliente.email}}</td>
+
+			<div>
+				<h2>Vehículos</h2>
+				<td>{{cliente.vehiculo.matricula}}</td>
+				<td>{{cliente.vehiculo.marca}}</td>
+				<td>{{cliente.vehiculo.modelo}}</td>
+			</div>
+			<td><a href="{% url 'profiles:detail' cliente.dni %}">Ver Perfil</a></td>
+		</div> 
 	{% endfor %}
 		<!--
 			"""

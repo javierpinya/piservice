@@ -9,6 +9,7 @@ class ClienteForm(forms.ModelForm):
 		fields = [
 			'nombre',
 			'apellidos',
+			'dni',
 			'razon_social',
 			'grupo',
 			'movil',
@@ -19,6 +20,7 @@ class ClienteForm(forms.ModelForm):
 		labels = {
 			'nombre':'Nombre',
 			'apellidos' : 'Apellidos',
+			'dni': 'DNI',
 			'razon_social': 'Razon_social',
 			'grupo': 'Grupo',
 			'movil': 'Móvil',

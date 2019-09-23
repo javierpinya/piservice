@@ -4,33 +4,84 @@
 {% block content %}
 {% include 'vehiculos/includes/vehiculos_menu.html' %}
 <div>
-	<form action="" method="post">{% csrf_token %}
-		<div>
+	
+	<form method="GET">
+
+		{{filter.form}}
+
+		<button type="submit" class="btn btn-primary">Buscar</button>
+
+		{% if filter.qs%}
+
+			{% for cliente in filter.qs %}
+				<div>
+					<h2>Perfil</h2>
+					{% if cliente.avatar %}
+						<img src="{{cliente.avatar.url}}">
+					{% else %}
+						<img src="{% static 'vehiculos/img/avatar.png' %}">
+					{% endif %}
+					<td>{{cliente.dni}}</td>
+					<td>{{cliente.nombre}}</td>
+					<td>{{cliente.apellidos}}</td>
+					<td>{{cliente.email}}</td>
+
+					<div>
+						<h2>Vehículos</h2>
+						<td>{{cliente.vehiculo.matricula}}</td>
+						<td>{{cliente.vehiculo.marca}}</td>
+						<td>{{cliente.vehiculo.modelo}}</td>
+					</div>
+					<td><a href="{% url '#' cliente.dni %}">Añadir coche</a></td> <!-- mirar bien esto: queremos añadir un vehículo a un cliente que ya existe -->
+				</div> 
+			{% endfor %}
+
+		{% endif %}
+
+	</form>
+		<form action="" method="post">{% csrf_token %}
+<div>
 			{{form2.as_p}}
 			{{form.as_p}}
-		</div>
+			</div>
 <!--
-		{{form2.nombre}}
-		{{form2.apellidos}}
-		{{form2.razon_social}}
-		{{form2.grupo}}
-		{{form2.movil}}
-		{{form2.email}}
-		{{form2.web}}
-		{{form2.observaciones}}
-		{{form.matricula}}
-		{{form.marca}}
-		{{form.modelo}}
-		{{form.color}}
-		{{form.kilometros}}
-		{{form.bastidor}}
-		{{form.asegurado}}
-		{{form.aseguradora}}
-		{{form.num_poliza}}
-		{{form.tipo_motor}}
-		{{form.placa_oval}}
-		{{form.observaciones}}
-	-->
+"""	
+		{% if filter.qs %}
+
+			{% for cliente in filter.qs %}
+				<div>
+					<h2>Perfil</h2>
+					{% if cliente.avatar %}
+						<img src="{{cliente.avatar.url}}">
+					{% else %}
+						<img src="{% static 'vehiculos/img/avatar.png' %}">
+					{% endif %}
+					<td>{{cliente.dni}}</td>
+					<td>{{cliente.nombre}}</td>
+					<td>{{cliente.apellidos}}</td>
+					<td>{{cliente.email}}</td>
+
+					<div>
+						<h2>Vehículos</h2>
+						<td>{{cliente.vehiculo.matricula}}</td>
+						<td>{{cliente.vehiculo.marca}}</td>
+						<td>{{cliente.vehiculo.modelo}}</td>
+					</div>
+					<td><a href="{% url 'profiles:detail' cliente.dni %}">Ver Perfil</a></td>
+				</div> 
+			{% endfor %}
+			<div>
+				{{form2.as_p}}
+				{{form.as_p}}
+			</div>
+		{% else %}
+			<div>
+			{{form2.as_p}}
+			{{form.as_p}}
+			</div>
+		{% endif %}
+		"""
+-->
 		
 		<div>
 			<input type="submit" value="Crear Vehículo">

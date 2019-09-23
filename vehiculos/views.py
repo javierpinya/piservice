@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from .models import Vehiculo, Cliente
 from .forms import ClienteForm, VehiculoForm, VehiculoUpdateForm
 from django.urls import reverse, reverse_lazy
-from .filters import VehiculoFilter, ClienteFilter
+from .filters import VehiculoFilter, ClienteFilter, ClienteVehiculoFilter
 
 class StaffRequiredMixin(object):
 
@@ -50,14 +50,15 @@ class VehiculoUpdateView(UpdateView):
 
 @method_decorator(staff_member_required, name="dispatch")
 class VehiculoCreateView(CreateView):
-	model = Vehiculo
+	model = Cliente
 	template_name="vehiculos/vehiculo_form.html"
-	form_class = VehiculoForm
-	second_form_class = ClienteForm
+	form_class = ClienteForm
+	second_form_class = VehiculoForm
 	success_url = reverse_lazy('vehiculos:index')
 
 	def get_context_data(self, **kwargs):
 		context = super(VehiculoCreateView, self).get_context_data(**kwargs)
+		context['filter'] = ClienteFilter(self.request.GET, queryset=self.get_queryset())
 		if 'form' not in context:
 			context['form'] = self.form_class(self.request.POST)
 		if 'form2' not in context:
@@ -70,7 +71,7 @@ class VehiculoCreateView(CreateView):
 		form2 = self.second_form_class(request.POST)
 		if form.is_valid() and form2.is_valid():
 			solicitud = form.save(commit=False)
-			solicitud.cliente = form2.save()
+			solicitud.vehiculo = form2.save()
 			solicitud.save()
 			return HttpResponseRedirect(self.get_success_url())
 		else:
@@ -116,7 +117,7 @@ class ClienteListView(ListView):
 
 @method_decorator(staff_member_required, name="dispatch")
 class ClienteVehiculoListView(ListView):
-	model = Vehiculo
+	model = Cliente
 	template_name="vehiculos/cliente_vehiculo_list.html"
 
 	def get_context_data(self, **kwargs):

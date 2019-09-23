@@ -9,22 +9,23 @@ class VehiculoFilter(django_filters.FilterSet):
 	class Meta:
 		model = Vehiculo
 		"""fields = ('matricula',)"""
-		fields = {'matricula':['icontains'],
+		fields = {	'matricula':['icontains'],
 				}
 
 class ClienteFilter(django_filters.FilterSet):
 	class Meta:
 		model = Cliente
-		fields = {'nombre':['icontains'],
+		fields = {	'nombre':['icontains'],
 					'apellidos': ['icontains'],
 					'dni': ['icontains'],
 					'movil': ['icontains'],
-		}
+				}
 
 class ClienteVehiculoFilter(django_filters.FilterSet):
 
 	class Meta:
-		model = Vehiculo
-		fields = {'matricula':['icontains'],
-					'cliente__apellidos':['icontains']
+		model = Cliente
+		fields = {	'dni':['icontains'],
+					'vehiculo__matricula':['icontains'],
+					'apellidos':['icontains'],
 				}
