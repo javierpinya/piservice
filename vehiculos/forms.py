@@ -4,6 +4,8 @@ from .models import Cliente, Vehiculo
 
 class ClienteForm(forms.ModelForm):
 
+	
+
 	class Meta:
 		model = Cliente
 		fields = [

@@ -32,7 +32,7 @@
 						<td>{{cliente.vehiculo.marca}}</td>
 						<td>{{cliente.vehiculo.modelo}}</td>
 					</div>
-					<td><a href="{% url '#' cliente.dni %}">Añadir coche</a></td> <!-- mirar bien esto: queremos añadir un vehículo a un cliente que ya existe -->
+					<!-- mirar bien esto: queremos añadir un vehículo a un cliente que ya existe -->
 				</div> 
 			{% endfor %}
 
@@ -42,7 +42,7 @@
 		<form action="" method="post">{% csrf_token %}
 <div>
 			{{form2.as_p}}
-			{{form.as_p}}
+		<!--"""	{form.as_p}}"""-->
 			</div>
 <!--
 """	
