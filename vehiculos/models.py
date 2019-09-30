@@ -44,28 +44,6 @@ class Proveedor(models.Model):
 		return self.nombre
 
 
-class Reparacion(models.Model):
-
-	cod_reparacion = models.IntegerField(null=True)
-	vendedor_oper = models.CharField(max_length=8, null=True, blank=True)
-	observaciones = RichTextField(null=True, blank=True)
-	tipo_descuento = models.CharField(max_length=3, null=True, blank=True)
-	kilometros = models.IntegerField(null=True, blank=True)
-	combustible = models.CharField(max_length=4, null=True, blank=True)
-	asegurado = models.BooleanField(null=True, blank=True)
-	libro_mantenimiento = models.BooleanField(null=True, blank=True)
-	fecha_cobro = models.DateTimeField(null=True, blank=True)
-	fecha_reparacion = models.DateTimeField(null=True, blank=True)
-	fecha_inspeccion = models.DateTimeField(null=True, blank=True)
-	num_peritacion = models.CharField(max_length=12, null=True, blank=True)
-	num_presupuesto = models.CharField(max_length=12, null=True, blank=True)
-	num_albaran = models.CharField(max_length=12, null=True, blank=True)
-	num_factura = models.CharField(max_length=12, null=True, blank=True)
-	updated = models.DateTimeField(auto_now=True, null=True)
-	created = models.DateTimeField(auto_now_add=True, null=True)
-
-	
-
 # Create your models here.
 class Vehiculo(models.Model):
 
@@ -81,7 +59,6 @@ class Vehiculo(models.Model):
 	tipo_motor = models.CharField(max_length=50, null=True, blank=True)
 	placa_oval = models.CharField(max_length=15, null=True, blank=True)
 	observaciones = RichTextField(null=True, blank=True)
-	reparacion = models.ForeignKey(Reparacion, null=True, on_delete=models.CASCADE)
 	created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 	updated = models.DateTimeField(auto_now=True, null=True, blank=True)
 
@@ -117,6 +94,30 @@ class Cliente(models.Model):
 	def __str__(self):
 		return self.apellidos
 
+
+class Reparacion(models.Model):
+
+	cod_reparacion = models.IntegerField(null=True)
+	vendedor_oper = models.CharField(max_length=8, null=True, blank=True)
+	observaciones = RichTextField(null=True, blank=True)
+	tipo_descuento = models.CharField(max_length=3, null=True, blank=True)
+	kilometros = models.IntegerField(null=True, blank=True)
+	combustible = models.CharField(max_length=4, null=True, blank=True)
+	asegurado = models.BooleanField(null=True, blank=True)
+	libro_mantenimiento = models.BooleanField(null=True, blank=True)
+	fecha_cobro = models.DateTimeField(null=True, blank=True)
+	fecha_reparacion = models.DateTimeField(null=True, blank=True)
+	fecha_inspeccion = models.DateTimeField(null=True, blank=True)
+	num_peritacion = models.CharField(max_length=12, null=True, blank=True)
+	num_presupuesto = models.CharField(max_length=12, null=True, blank=True)
+	num_albaran = models.CharField(max_length=12, null=True, blank=True)
+	num_factura = models.CharField(max_length=12, null=True, blank=True)
+	vehiculo = models.ForeignKey(Vehiculo, null=True, blank=True, on_delete=models.CASCADE)
+	updated = models.DateTimeField(auto_now=True, null=True)
+	created = models.DateTimeField(auto_now_add=True, null=True)
+
+	def __str__(self):
+		return self.cod_reparacion
 
 class contabilidad_cliente(models.Model):
 

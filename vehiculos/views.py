@@ -18,8 +18,12 @@ class StaffRequiredMixin(object):
 		return super(VehiculoCreate, self).dispatch(request, *args, **kwargs)
 
 class VehiculoListView(ListView):
-	model = Vehiculo
+	model = Cliente
+	second_model = Vehiculo
 	template_name = "vehiculos/vehiculo_list.html"
+	form_class = ClienteForm
+	second_form_class = VehiculoForm
+	success_url = reverse_lazy('vehiculos:list')
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -43,10 +47,38 @@ class VehiculoIndex(ListView):
 
 @method_decorator(staff_member_required, name="dispatch")
 class VehiculoUpdateView(UpdateView):
-	model = Vehiculo
+	model = Cliente
 	template_name = "vehiculos/vehiculo_edit.html"
-	form_class = VehiculoUpdateForm
+	form_class = ClienteForm
+	second_form_class = VehiculoForm
 	success_url = reverse_lazy('vehiculos:list')
+
+"""
+# @method_decorator(staff_member_required, name="dispatch")
+# class AddVehiculo(CreateView):
+# 	model = Cliente
+# 	template_name = "vehiculos/vehiculo_form.html"
+# 	form_class = ClienteForm
+# 	second_form_class = VehiculoForm
+
+# 	def get_context_data(self, **kwargs):
+# 		context = super(VehiculoUpdateView, self).get_context_data(**kwargs)
+# 		pk = self.kwargs.get('pk', 0)
+# 		cliente = self.model.objects.get(id=pk)
+# 		vehiculo = self.second_model.objects.get(id=cliente.vehiculo)
+# 		if 'form' not in context:
+# 			context['form'] = self.form_class()
+# 		if 'form2' not in context:
+# 			context['form2'] = self.second_form_class(instance=vehiculo)
+# 		context['id'] = pk
+# 		return context
+
+# 	def post(self, request, *args, **kwargs):
+# 		self.object = self.get_object
+# 		id_cliente = kwargs['pk']
+# 		cliente = self.model.objects.get(id=id_cliente)
+# 		vehiculo = self.second_model.objects.get(id=cliente.vehiculo)
+"""
 
 @method_decorator(staff_member_required, name="dispatch")
 class VehiculoCreateView(CreateView):
