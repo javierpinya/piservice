@@ -12,7 +12,6 @@ class ClienteForm(forms.ModelForm):
 			'nombre',
 			'apellidos',
 			'dni',
-			'vehiculo',
 			'razon_social',
 			'grupo',
 			'movil',
@@ -24,7 +23,6 @@ class ClienteForm(forms.ModelForm):
 			'nombre':'Nombre',
 			'apellidos' : 'Apellidos',
 			'dni': 'DNI',
-			'vehiculo': 'Matrícula',
 			'razon_social': 'Razon_social',
 			'grupo': 'Grupo',
 			'movil': 'Móvil',
@@ -39,6 +37,7 @@ class VehiculoForm(forms.ModelForm):
 	class Meta:
 		model = Vehiculo
 		fields = [
+			'cliente',
 			'matricula',
 			'marca',
 			'modelo',
@@ -53,6 +52,7 @@ class VehiculoForm(forms.ModelForm):
 			'observaciones',
 		]
 		labels = {
+			'cliente': 'Cliente',
 			'matricula':'Matrícula',
 			'marca':'Marca',
 			'modelo':'Modelo',

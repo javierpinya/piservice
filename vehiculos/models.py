@@ -44,26 +44,7 @@ class Proveedor(models.Model):
 		return self.nombre
 
 
-# Create your models here.
-class Vehiculo(models.Model):
 
-	matricula = models.CharField(max_length=7)
-	marca = models.CharField(max_length=20, null=True, blank=True)
-	modelo = models.CharField(max_length=20, null=True, blank=True)
-	color = models.CharField(max_length=15, null=True, blank=True)
-	kilometros = models.PositiveIntegerField(null=True, blank=True)
-	bastidor = models.CharField(max_length=25, null=True, blank=True)
-	asegurado = models.BooleanField(null=True, blank=True)
-	aseguradora =models.CharField(max_length=50, null=True, blank=True)
-	num_poliza = models.CharField(max_length=20, null=True, blank=True)
-	tipo_motor = models.CharField(max_length=50, null=True, blank=True)
-	placa_oval = models.CharField(max_length=15, null=True, blank=True)
-	observaciones = RichTextField(null=True, blank=True)
-	created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-	updated = models.DateTimeField(auto_now=True, null=True, blank=True)
-
-	def __str__(self):
-		return self.matricula
 
 
 class Cliente(models.Model):
@@ -71,7 +52,6 @@ class Cliente(models.Model):
 	avatar = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
 	nombre = models.CharField(max_length=60)
 	apellidos = models.CharField(max_length=60)
-	vehiculo = models.ForeignKey(Vehiculo, null=True, on_delete=models.CASCADE)
 	razon_social = models.CharField(max_length=60, null=True,blank=True)
 	grupo = models.CharField(max_length=10, null=True,blank=True)
 	dni = models.CharField(max_length=9, default="0")
@@ -93,6 +73,29 @@ class Cliente(models.Model):
 
 	def __str__(self):
 		return self.apellidos
+
+
+# Create your models here.
+class Vehiculo(models.Model):
+
+	cliente = models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.CASCADE)
+	matricula = models.CharField(max_length=7)
+	marca = models.CharField(max_length=20, null=True, blank=True)
+	modelo = models.CharField(max_length=20, null=True, blank=True)
+	color = models.CharField(max_length=15, null=True, blank=True)
+	kilometros = models.PositiveIntegerField(null=True, blank=True)
+	bastidor = models.CharField(max_length=25, null=True, blank=True)
+	asegurado = models.BooleanField(null=True, blank=True)
+	aseguradora =models.CharField(max_length=50, null=True, blank=True)
+	num_poliza = models.CharField(max_length=20, null=True, blank=True)
+	tipo_motor = models.CharField(max_length=50, null=True, blank=True)
+	placa_oval = models.CharField(max_length=15, null=True, blank=True)
+	observaciones = RichTextField(null=True, blank=True)
+	created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+	updated = models.DateTimeField(auto_now=True, null=True, blank=True)
+
+	def __str__(self):
+		return self.matricula
 
 
 class Reparacion(models.Model):

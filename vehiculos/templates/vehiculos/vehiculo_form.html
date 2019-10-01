@@ -7,7 +7,7 @@
 	
 	<form method="GET">
 
-		{{filter.form}}
+		{{filter.form2}}
 
 		<button type="submit" class="btn btn-primary">Buscar</button>
 
@@ -28,9 +28,9 @@
 
 					<div>
 						<h2>Vehículos</h2>
-						<td>{{cliente.vehiculo.matricula}}</td>
-						<td>{{cliente.vehiculo.marca}}</td>
-						<td>{{cliente.vehiculo.modelo}}</td>
+						<td>{{vehiculo.matricula}}</td>
+						<td>{{vehiculo.marca}}</td>
+						<td>{{vehiculo.modelo}}</td>
 					</div>
 					<!-- mirar bien esto: queremos añadir un vehículo a un cliente que ya existe -->
 				</div> 
@@ -41,7 +41,7 @@
 	</form>
 		<form action="" method="post">{% csrf_token %}
 			<div>
-				{{form2.as_p}}
+				{{form.as_p}}
 			</div>		
 		<div>
 			<input type="submit" value="Crear Vehículo">
