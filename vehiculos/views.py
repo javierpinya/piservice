@@ -85,29 +85,23 @@ class VehiculoCreateView(CreateView):
 	model = Vehiculo
 	template_name="vehiculos/vehiculo_form.html"
 	form_class = VehiculoForm
-	#second_form_class = ClienteForm
 	success_url = reverse_lazy('vehiculos:index')
 
 	def get_context_data(self, **kwargs):
 		context = super(VehiculoCreateView, self).get_context_data(**kwargs)
-		context['filter'] = ClienteFilter(self.request.GET, queryset=self.get_queryset())
+		context['filter'] = VehiculoFilter(self.request.GET, queryset=self.get_queryset())
 		if 'form' not in context:
 			context['form'] = self.form_class(self.request.POST)
-		#if 'form2' not in context:
-		#	context['form2'] = self.second_form_class(self.request.POST)
 		return context
 
 	def post(self, request, *args, **kwargs):
 		self.object = self.get_object
 		form = self.form_class(request.POST)
-	#	form2 = self.second_form_class(request.POST)
-		if form.is_valid(): # and form2.is_valid(): #solicitud.save(commit=False)
-			solicitud = form.save()
-	#		solicitud.cliente = form2.save()
-			
+		if form.is_valid():
+			solicitud = form.save()			
 			return HttpResponseRedirect(self.get_success_url())
 		else:
-			return self.render_to_response(self.get_context_data(form=form)) #, form2=form2))
+			return self.render_to_response(self.get_context_data(form=form))
 
 @method_decorator(staff_member_required, name="dispatch")
 class ClienteIndex(ListView):

@@ -10,6 +10,7 @@ class VehiculoFilter(django_filters.FilterSet):
 		model = Vehiculo
 		"""fields = ('matricula',)"""
 		fields = {	'matricula':['icontains'],
+					'cliente__dni':['icontains'],
 				}
 
 class ClienteFilter(django_filters.FilterSet):
