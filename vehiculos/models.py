@@ -72,12 +72,16 @@ class Cliente(models.Model):
 		ordering = ['-updated']
 
 	def __str__(self):
-		return self.apellidos
+		return self.dni + " - " + self.nombre + " " + self.apellidos
 
 
 # Create your models here.
 class Vehiculo(models.Model):
-
+	# Sería interesante poder añadir tantas fotos como sean necesarias sobre un coche:
+	# como avatar, libro de mantenimiento, ficha técnica, siniestros varios, etc
+	# para ello, estaría bien crear un modelo de fotos con dos campos, uno foreign key para el coche
+	# y otro con la imagen en sí.
+	avatar = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
 	cliente = models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.CASCADE)
 	matricula = models.CharField(max_length=7)
 	marca = models.CharField(max_length=20, null=True, blank=True)
@@ -87,6 +91,7 @@ class Vehiculo(models.Model):
 	bastidor = models.CharField(max_length=25, null=True, blank=True)
 	asegurado = models.BooleanField(null=True, blank=True)
 	aseguradora =models.CharField(max_length=50, null=True, blank=True)
+	libro_mto = models.BooleanField(null=True, blank=True)
 	num_poliza = models.CharField(max_length=20, null=True, blank=True)
 	tipo_motor = models.CharField(max_length=50, null=True, blank=True)
 	placa_oval = models.CharField(max_length=15, null=True, blank=True)
@@ -97,6 +102,13 @@ class Vehiculo(models.Model):
 	def __str__(self):
 		return self.matricula
 
+class Fotos(models.Model):
+	vehiculo = models.ForeignKey(Vehiculo, null=True, blank=True, on_delete=models.CASCADE)
+	foto = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
+
+	#def __str__(self):
+	#	return self.foto
+
 
 class Reparacion(models.Model):
 
@@ -104,10 +116,6 @@ class Reparacion(models.Model):
 	vendedor_oper = models.CharField(max_length=8, null=True, blank=True)
 	observaciones = RichTextField(null=True, blank=True)
 	tipo_descuento = models.CharField(max_length=3, null=True, blank=True)
-	kilometros = models.IntegerField(null=True, blank=True)
-	combustible = models.CharField(max_length=4, null=True, blank=True)
-	asegurado = models.BooleanField(null=True, blank=True)
-	libro_mantenimiento = models.BooleanField(null=True, blank=True)
 	fecha_cobro = models.DateTimeField(null=True, blank=True)
 	fecha_reparacion = models.DateTimeField(null=True, blank=True)
 	fecha_inspeccion = models.DateTimeField(null=True, blank=True)
@@ -264,9 +272,7 @@ class Articulo(models.Model):
 	precio_venta = models.IntegerField(null=True, blank=True)
 	beneficio = models.IntegerField(null=True, blank=True)
 	pvp_iva = models.IntegerField(null=True, blank=True)
-	proveedores = models.ManyToManyField(Proveedor)
-	vehiculos = models.ManyToManyField(Vehiculo)
-
+	proveedores = models.ForeignKey(Proveedor, null=True, on_delete=models.CASCADE)
 
 	class Meta:
 		ordering = ['articulo']

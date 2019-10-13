@@ -25,8 +25,8 @@ class ClienteFilter(django_filters.FilterSet):
 class ClienteVehiculoFilter(django_filters.FilterSet):
 
 	class Meta:
-		model = Cliente
-		fields = {	'dni':['icontains'],
-					'vehiculo__matricula':['icontains'],
-					'apellidos':['icontains'],
+		model = Vehiculo
+		fields = {	'cliente__dni':['icontains'],
+					'cliente__apellidos':['icontains'],
+					'matricula':['icontains'],
 				}

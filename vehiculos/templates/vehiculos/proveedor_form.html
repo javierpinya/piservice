@@ -1,0 +1,16 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Artículos{% endblock %}
+{% block content %}
+{% include 'vehiculos/includes/vehiculos_menu.html' %}
+<div>
+	<form action="" method="post">{% csrf_token %}
+		<div>
+			{{form.as_p}}
+		</div>
+		<div>
+			<input type="submit" value="Crear Cliente">
+		</div>
+	</form>
+</div>
+{% endblock %}

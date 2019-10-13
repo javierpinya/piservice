@@ -11,6 +11,7 @@
 			<p>{{profile.dni}} - {{profile.nombre}} - {{profile.apellidos}}<br>
 				<a href="{% url 'profiles:detail' profile.dni %}">Ver perfil</a>
 			</p>
+			{% endfor %}
 		</div>
 	</div>
 

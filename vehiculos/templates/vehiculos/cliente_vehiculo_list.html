@@ -11,76 +11,27 @@
 		<button type="submit" class="btn btn-primary">Buscar</button>
 
 	</form>
-	{% for cliente in filter.qs %}
+	{% for vehiculo in filter.qs %}
 		<div>
 			<h2>Perfil</h2>
-			{% if cliente.avatar %}
-				<img src="{{cliente.avatar.url}}">
+			{% if vehiculo.cliente.avatar %}
+				<img src="{{vehiculo.cliente.avatar.url}}">
 			{% else %}
 				<img src="{% static 'vehiculos/img/avatar.png' %}">
 			{% endif %}
-			<td>{{cliente.dni}}</td>
-			<td>{{cliente.nombre}}</td>
-			<td>{{cliente.apellidos}}</td>
-			<td>{{cliente.email}}</td>
+			<td>{{vehiculo.cliente.dni}}</td>
+			<td>{{vehiculo.cliente.nombre}}</td>
+			<td>{{vehiculo.cliente.apellidos}}</td>
+			<td>{{vehiculo.cliente.email}}</td>
 
 			<div>
 				<h2>Vehículos</h2>
-				<td>{{cliente.vehiculo.matricula}}</td>
-				<td>{{cliente.vehiculo.marca}}</td>
-				<td>{{cliente.vehiculo.modelo}}</td>
+				<td>{{vehiculo.matricula}}</td>
+				<td>{{vehiculo.marca}}</td>
+				<td>{{vehiculo.modelo}}</td>
 			</div>
-			<td><a href="{% url 'profiles:detail' cliente.dni %}">Ver Perfil</a></td>
+			<td><a href="#">Ver Perfil</a></td>
 		</div> 
 	{% endfor %}
-		<!--
-			"""
-		<ul>
-			<th>DNI</th>
-			<th>Nombre</th>
-			<th>Apellidos</th>
-			<th>Grupo</th>
-			<th>Código Postal</th>
-			<th>Dirección</th>
-			<th>Localidad</th>
-			<th>Provincia</th>
-			<th>País</th>
-			<th>Tfno Móvil</th>
-			<th>Email</th>
-			<th>Web</th>
-			<th>Fecha Alta</th>
-			<th>Fecha Modificación</th>
-			<th>Observaciones</th>
-			<th>Cliente_FK</th>
-			<th>matricula</th>
-			<th>marca</th>
-			<th>modelo</th>
-			{% for cliente in filter.qs %}
-				<div>
-					<td>{{cliente.dni}}</td>
-					<td>{{cliente.nombre}}</td>
-					<td>{{cliente.apellidos}}</td>
-					<td>{{cliente.grupo}}</td>
-					<td>{{cliente.cod_postal}}</td>
-					<td>{{cliente.direccion}}</td>
-					<td>{{cliente.localidad}}</td>
-					<td>{{cliente.provincia}}</td>
-					<td>{{cliente.pais}}</td>
-					<td>{{cliente.movil}}</td>
-					<td>{{cliente.email}}</td>
-					<td>{{cliente.web}}</td>
-					<td>{{cliente.created}}</td>
-					<td>{{cliente.updated}}</td>
-					<td>{{cliente.observaciones}}</td>
-					<td>{{vehiculo.cliente}}</td>
-					<td>{{vehiculo.matricula}}</td>
-					<td>{{vehiculo.marca}}</td>
-					<td>{{vehiculo.modelo}}</td>
-					<td><a href="#">Editar</a></td>
-				</div>
-			{% endfor %}
-		</ul>
-		"""
-	-->
 </div>
 {% endblock %}

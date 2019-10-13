@@ -4,7 +4,7 @@ from .models import Vehiculo, Cliente, Proveedor, Articulo, Ficha_Tecnica, Repar
 # Register your models here.
 
 class VehiculoAdmin(admin.ModelAdmin):
-	list_display = ('matricula', 'marca', 'modelo')
+	list_display = ('cliente', 'matricula', 'marca', 'modelo')
 
 admin.site.register(Vehiculo, VehiculoAdmin)
 

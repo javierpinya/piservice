@@ -1,10 +1,8 @@
 from django import forms
-from .models import Cliente, Vehiculo
+from .models import Cliente, Vehiculo, Reparacion, Articulo, Proveedor
 
 
 class ClienteForm(forms.ModelForm):
-
-	
 
 	class Meta:
 		model = Cliente
@@ -72,3 +70,28 @@ class VehiculoUpdateForm(forms.ModelForm):
 	class Meta:
 		model = Vehiculo
 		exclude = ['created']
+
+class OrdenReparacionForm(forms.ModelForm):
+	class Meta:
+		model = Reparacion
+		exclude = ['created', 'updated']
+		widgets = {
+			'vehiculo':forms.TextInput(),
+			'observaciones':forms.Textarea(),
+		}
+
+class ArticuloForm(forms.ModelForm):
+	class Meta:
+		model = Articulo
+		exclude = ['created', 'updated']
+		widgets = {
+			'observaciones':forms.Textarea(),
+		}
+
+class ProveedorForm(forms.ModelForm):
+	class Meta:
+		model = Proveedor
+		exclude = ['created','updated']
+		widgets = {
+			'observaciones':forms.Textarea(),
+		}

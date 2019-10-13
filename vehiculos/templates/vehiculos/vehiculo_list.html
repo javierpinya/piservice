@@ -15,14 +15,18 @@
 			<th>matricula</th>
 			<th>marca</th>
 			<th>modelo</th>
-			{% for cliente in filter.qs %}
+			{% for vehiculo in filter.qs %}
 				<div>
 					<td></td>
-					<td>{{cliente.dni}}</td>
-					<td>{{cliente.vehiculo.matricula}}</td>
-					<td>{{cliente.vehiculo.marca}}</td>
-					<td>{{cliente.vehiculo.modelo}}</td>
-					<td><a href="{% url 'vehiculos:editar' cliente.id %}">Editar</a></td>
+					<td>{{vehiculo.cliente.dni}}</td>
+					<td>{{vehiculo.matricula}}</td>
+					<td>{{vehiculo.marca}}</td>
+					<td>{{vehiculo.modelo}}</td>
+					<td><a href="{% url 'vehiculos:editar' vehiculo.matricula %}">Editar</a></td>
+					<td><a href="{% url 'vehiculos:detalle' vehiculo.id %}">Detalle</a></td>
+					<td><a href="{% url 'vehiculos:ordenreparacion' vehiculo.id %}">O.R.</a></td>
+					<td><a href="{% url 'vehiculos:historial' vehiculo.id %}">Historial</a></td>
+
 				</div>
 			{% endfor %}
 		</ul>

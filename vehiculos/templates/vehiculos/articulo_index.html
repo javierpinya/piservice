@@ -1,0 +1,19 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Artículo{% endblock %}
+{% block content %}
+{% include 'vehiculos/includes/vehiculos_menu.html' %}
+
+<main role="main">
+	<div>
+		<nav id="ioSubMenu">
+		  <div id="card_submenu">
+		    <ul>
+		    	<li><a href="{% url 'vehiculos:crear_articulo' %}">Nuevo</a></li>
+		    	<li><a href="#">Buscar</a></li>
+		    </ul>
+		  </div>
+		</nav>
+	</div>
+</main>
+{% endblock %}

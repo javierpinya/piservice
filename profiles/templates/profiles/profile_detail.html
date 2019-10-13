@@ -30,7 +30,17 @@
 				<td>{{cliente.vehiculo.matricula}}</td>
 				<td>{{cliente.vehiculo.modelo}}</td>
 				<td>{{cliente.vehiculo.kilometros}}</td>
+			</div>
 
+			Vehiculos
+
+			<div>
+				{% for vehiculo in vehiculo_list %}
+				<p>{{vehiculo.matricula}} - {{vehiculo.marca}} - {{vehiculo.modelo}}<br>
+					<a href="#">Ver perfil</a>
+				</p>
+				{% endfor %}
+			</div>
 	</div>
 
 

@@ -4,6 +4,11 @@ from vehiculos.models import Vehiculo, Cliente
 class ClienteVehiculoFilter(django_filters.FilterSet):
 
 	class Meta:
-		model = Cliente
-		fields = {'dni':['icontains']
+		model = Vehiculo
+		fields = {'cliente__dni':['icontains'],
+					'cliente__apellidos':['icontains']
 				}
+
+class VehiculoFilter(django_filters.FilterSet):
+	class Meta:
+		model = Vehiculo
