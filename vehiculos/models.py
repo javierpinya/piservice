@@ -2,7 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 def custom_upload_to(instance, filename):
-	old_instance = Profile.objects.get(pk=instance.pk)
+	old_instance = Vehiculo.objects.get(pk=instance.pk)
 	old_intance.avatar.delete()
 	return'profiles/' + filename
 
@@ -36,6 +36,9 @@ class Proveedor(models.Model):
 	observaciones = RichTextField(null=True,blank=True)
 	alarmas = models.CharField(max_length=5, null=True,blank=True)
 	nueva_alarma = models.CharField(max_length=5, null=True,blank=True)
+	created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de alta", null=True)
+	updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de edición", null=True)
+
 
 	class Meta:
 		ordering = ['nombre']
@@ -81,7 +84,7 @@ class Vehiculo(models.Model):
 	# como avatar, libro de mantenimiento, ficha técnica, siniestros varios, etc
 	# para ello, estaría bien crear un modelo de fotos con dos campos, uno foreign key para el coche
 	# y otro con la imagen en sí.
-	avatar = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
+	avatar = models.ImageField(upload_to='profiles', null=True, blank=True)
 	cliente = models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.CASCADE)
 	matricula = models.CharField(max_length=7)
 	marca = models.CharField(max_length=20, null=True, blank=True)
@@ -128,7 +131,7 @@ class Reparacion(models.Model):
 	created = models.DateTimeField(auto_now_add=True, null=True)
 
 	def __str__(self):
-		return self.cod_reparacion
+		return str(self.cod_reparacion)
 
 class contabilidad_cliente(models.Model):
 

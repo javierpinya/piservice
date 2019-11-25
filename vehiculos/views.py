@@ -1,13 +1,15 @@
+from django.contrib.postgres.search import SearchVector
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic.base import TemplateView
+from django.db.models import Count
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from .models import Vehiculo, Cliente, Reparacion, Articulo, Proveedor
-from .forms import ClienteForm, VehiculoForm, VehiculoUpdateForm, OrdenReparacionForm, ArticuloForm, ProveedorForm
+from .forms import ClienteForm, VehiculoForm, VehiculoUpdateForm, OrdenReparacionForm, ArticuloForm, ProveedorForm, SearchForm, VehiculoDetailForm
 from django.urls import reverse, reverse_lazy
 from .filters import VehiculoFilter, ClienteFilter, ClienteVehiculoFilter
 
@@ -28,8 +30,20 @@ class VehiculoListView(ListView):
 		context['filter'] = VehiculoFilter(self.request.GET, queryset=self.get_queryset())
 		return context
 
+class VehiculoClienteListView(ListView):
+	model = Vehiculo
+	template_name = "vehiculos/vehiculo_cliente_list.html"
+	success_url = reverse_lazy('vehiculos:lista_vehiculos_filtrada')
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['vehiculos'] = Vehiculo.objects.annotate(vehiculoss = filter(cliente = self.kwargs['pk']))
+		return context
+		
+
 class VehiculoDetailView(DetailView):
 	model = Vehiculo
+	#form_class = VehiculoDetailForm
 	template_name = "vehiculos/vehiculo_detail.html"
 
 	def get_context_data(self, **kwargs):
@@ -91,6 +105,12 @@ class VehiculoOrdenReparacionView(CreateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(VehiculoOrdenReparacionView, self).get_context_data(**kwargs)
+		contador_or = Reparacion.objects.annotate(num_coches = Count('vehiculo'))
+		contador_or += 1
+		if contador_or is None:
+			form = SearchForm()
+		else:
+			form = SearchForm(initial={'cod_reparacion':contador_or})
 		return context
 
 	def post(self, request, *args, **kwargs):
@@ -132,6 +152,32 @@ class ClienteCreateView(CreateView):
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
+def cliente_search(request):
+	form = SearchForm()
+	query = None
+	results = []
+	
+	if 'query' in request.GET:
+		form = SearchForm(request.GET)
+		if form.is_valid():
+			query = form.cleaned_data['query']
+			results = Cliente.objects.annotate(search=SearchVector('nombre', 'apellidos', 'dni', 'email','movil'),).filter(search__icontains=query)
+	return render(request,
+					'vehiculos/cliente_buscar.html',
+						{'form': form,'query': query,'results': results})
+
+@method_decorator(staff_member_required, name="dispatch")
+class ClienteDetailView(DetailView):
+	model = Cliente
+	template_name = "vehiculos/cliente_detail.html"
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['filter'] = Vehiculo.objects.annotate(num_coches = Count('cliente')).filter(cliente = self.kwargs['pk'])
+		context['resultado'] = Vehiculo.objects.annotate(search=SearchVector('cliente'),).filter(search__icontains=self.kwargs['pk'])
+		return context
+
+@method_decorator(staff_member_required, name="dispatch")
 class ClienteListView(ListView):
 	model = Cliente
 	template_name = "vehiculos/cliente_list.html"
@@ -175,6 +221,35 @@ class ProveedorCreateView(CreateView):
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
+@method_decorator(staff_member_required,name="dispatch")
+class ProveedorIndex(ListView):
+	model = Proveedor
+	template_name = "vehiculos/proveedor_index.html"
+
+
+def proveedor_search(request):
+	form = SearchForm()
+	query = None
+	results = []
+
+	if 'query' in request.GET:
+		form = SearchForm(request.GET)
+		if form.is_valid():
+			query = form.cleaned_data['query']
+			results = Proveedor.objects.annotate(search=SearchVector('nombre','cif','persona_contacto','movil','email','web'))
+	return render(request,
+					'vehiculos/proveedor_buscar.html',
+					{'form': form, 'query': query, 'results': results})
+
+@method_decorator(staff_member_required, name="dispatch")
+class ProveedorDetailView(DetailView):
+	model = Proveedor
+	template_name = "vehiculos/proveedor_detail.html"
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		return context
+
 @method_decorator(staff_member_required, name="dispatch")
 class ArticuloCreateView(CreateView):
 	model = Articulo
@@ -198,12 +273,23 @@ class ArticuloCreateView(CreateView):
 		else:
 			return self.render_to_response(self.get_context_data(form=form))
 
-@method_decorator(staff_member_required,name="dispatch")
-class ProveedorIndex(ListView):
-	model = Proveedor
-	template_name = "vehiculos/proveedor_index.html"
 
 @method_decorator(staff_member_required,name="dispatch")
 class ArticuloIndex(ListView):
 	model = Articulo
 	template_name = "vehiculos/articulo_index.html"
+
+
+def vehiculo_search(request):
+	form = SearchForm()
+	query = None
+	results = []
+	
+	if 'query' in request.GET:
+		form = SearchForm(request.GET)
+		if form.is_valid():
+			query = form.cleaned_data['query']
+			results = Vehiculo.objects.annotate(search=SearchVector('matricula', 'marca', 'modelo'),).filter(search__icontains=query)
+	return render(request,
+					'vehiculos/vehiculo_buscar.html',
+						{'form': form,'query': query,'results': results})

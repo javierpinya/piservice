@@ -1,0 +1,44 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}{{cliente.nombre}} {{cliente.apellidos}}{% endblock %}
+{% block content %}
+<main role="main">
+
+  <!-- Esto no funciona -->
+  <div>
+      <div>
+        {% if cliente.avatar %}
+          <img src="{{cliente.avatar.url}}">
+        {% else %}
+          <img src="{% static 'vehiculos/img/avatar.png' %}">
+        {% endif %}
+        <h3>{{cliente.nombre}}</h3>
+        <p>Cliente: {{cliente.nombre|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.apellidos|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.razon_social|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.grupo|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.dni|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.movil|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.email|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.web|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.direccion|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.cod_postal|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.localidad|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.provincia|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.pais|striptags|safe|truncatechars:"200"}}</p>
+        {% if cliente.observaciones %}<p>{{cliente.observaciones|striptags|safe|truncatechars:"200"}}</p>{% endif %}
+        <p>{{cliente.created|striptags|safe|truncatechars:"200"}}</p>
+        <p>{{cliente.updated|striptags|safe|truncatechars:"200"}}</p>
+        <!-- """ <p><a href="{% url 'vehiculos:lista_vehiculos_filtrada' cliente.id %}">Num vehículos: {{filter.count}}</a></p> """ -->
+      </div>
+      <div>
+        {% for vehiculo in resultado %}
+          <h4><a href="{% url 'vehiculos:detalle' vehiculo.id %}">{{vehiculo.matricula}}</a></h4>
+          {{ vehiculo.marca}} - {{vehiculo.modelo}}
+          {% empty %}
+            <p>Sin resultados para la búsqueda.</p>
+        {% endfor %}
+      </div>
+  </div>
+</main>
+{% endblock %}

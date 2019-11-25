@@ -65,6 +65,46 @@ class VehiculoForm(forms.ModelForm):
 			'observaciones':'Observaciones',
 		}
 
+class VehiculoDetailForm(forms.ModelForm):
+	class Meta:
+		model = Vehiculo
+		fields = [
+			'avatar',
+			'cliente',
+			'matricula',
+			'marca',
+			'modelo',
+			'color',
+			'kilometros',
+			'bastidor',
+			'asegurado',
+			'aseguradora',
+			'num_poliza',
+			'tipo_motor',
+			'placa_oval',
+			'observaciones',
+		]
+		labels = {
+			'avatar': 'Avatar',
+			'cliente': 'Cliente',
+			'matricula':'Matrícula',
+			'marca':'Marca',
+			'modelo':'Modelo',
+			'color':'Color',
+			'kilometros':'Kilómetros',
+			'bastidor':'Bastidor',
+			'asegurado':'Asegurado',
+			'aseguradora':'Aseguradora',
+			'num_poliza':'Número de Póliza',
+			'tipo_motor':'Tipo de Motor',
+			'placa_oval':'Placa Oval',
+			'observaciones':'Observaciones',
+		}
+		exclude = {'created'}
+		widgets = {
+			'observaciones':forms.Textarea(),
+		}
+
 
 class VehiculoUpdateForm(forms.ModelForm):
 	class Meta:
@@ -95,3 +135,6 @@ class ProveedorForm(forms.ModelForm):
 		widgets = {
 			'observaciones':forms.Textarea(),
 		}
+
+class SearchForm(forms.Form):
+	query = forms.CharField()

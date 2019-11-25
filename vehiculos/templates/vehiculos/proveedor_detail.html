@@ -1,0 +1,39 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}{{proveedor.nombre}}{% endblock %}
+{% block content %}
+<main role="main">
+  <div>
+    <div>
+      <h3>{{proveedor.nombre}}</h3>
+      <p>Proveedor: {{proveedor.nombre|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.cif|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.direccion|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.persona_contacto|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.movil|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.email|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.web|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.cod_postal|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.localidad|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.provincia|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.pais|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.banco|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.ccc|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.forma_pago|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.medio_pago|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.cuenta_contable|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.cuenta_ingresos|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.cuenta_retencion|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.cuenta_caja|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.irpf|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.saldo|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.iva|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.intracomunitario|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.alarmas|striptags|safe|truncatechars:"200"}}</p>
+      {% if proveedor.observaciones %}<p>{{vehiculo.observaciones|striptags|safe|truncatechars:"200"}}</p>{% endif %}
+      <p>{{proveedor.created|striptags|safe|truncatechars:"200"}}</p>
+      <p>{{proveedor.updated|striptags|safe|truncatechars:"200"}}</p>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Buscar cliente{% endblock %}
+{% block content %}
+
+{% if query %}
+	<h1>cliente que contiene "{{ query }}"</h1>
+	<h3>{% with results.count as total_results %}Encontrados {{ total_results }} resultado {{ total_results|pluralize}}
+	{% endwith %}</h3>
+<!-- Al utilizar el modelo Vehiculo para buscar un cliente, foreign key, tenemos el problema de que si un cliente tiene varios coches, aparecerá en la lista tantas veces como coches tenga. Quizá sería más interesante buscar primero por cliente y, después, al hacer clic sobre él, que el sistema haga una búsqueda interna con su ID o lo que sea para buscar sus coches... -->
+	{% for cliente in results %}
+		<h4><a href="{% url 'vehiculos:detalle_cliente' cliente.id %}">{{cliente.nombre}} {{cliente.apellidos}}</a></h4>
+		<p>{{cliente.dni}}</p>
+		<p>{{cliente.movil}}</p>
+		<p>{{cliente.email}}</p>
+		{% empty %}
+		<p>Sin resultados para la búsqueda.</p>
+	{% endfor %}
+	<p><a href="{% url 'vehiculos:cliente_search' %}">Buscar</a></p>
+{% else %}
+	<h1>Buscar cliente</h1>
+	<form action="." method="get">
+		{{ form.as_p}}
+		<input type="submit" name="Buscar">
+	</form>
+{% endif %}
+{% endblock %}

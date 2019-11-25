@@ -1,0 +1,24 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Buscar vehículo{% endblock %}
+{% block content %}
+
+{% if query %}
+	<h1>Vehículos que contienen "{{ query }}"</h1>
+	<h3>{% with results.count as total_results %}Encontrados {{ total_results }} resultado {{ total_results|pluralize}}
+	{% endwith %}</h3>
+	{% for vehiculo in results %}
+		<h4><a href="{% url 'vehiculos:detalle' vehiculo.id %}">{{vehiculo.matricula}}</a></h4>
+		{{ vehiculo.marca}} - {{vehiculo.modelo}}
+		{% empty %}
+		<p>Sin resultados para la búsqueda.</p>
+	{% endfor %}
+	<p><a href="{% url 'vehiculos:vehiculo_search' %}">Buscar</a></p>
+{% else %}
+	<h1>Buscar vehículos</h1>
+	<form action="." method="get">
+		{{ form.as_p}}
+		<input type="submit" name="Buscar">
+	</form>
+{% endif %}
+{% endblock %}

@@ -27,34 +27,10 @@
       {% if vehiculo.observaciones %}<p>{{vehiculo.observaciones|striptags|safe|truncatechars:"200"}}</p>{% endif %}
       <p>{{vehiculo.created|striptags|safe|truncatechars:"200"}}</p>
       <p>{{vehiculo.updated|striptags|safe|truncatechars:"200"}}</p>
+      <td><a href="{% url 'vehiculos:editar' vehiculo.matricula %}">Editar</a></td>
+      <td><a href="{% url 'vehiculos:ordenreparacion' vehiculo.id %}">O.R.</a></td>
+      <td><a href="{% url 'vehiculos:historial' vehiculo.id %}">Historial</a></td>
     </div>
-
-
-<!--
-      """
-      {% for vehiculo in vehiculo_list|dictsort:"id" reversed %}
-        <div>
-          <h2>{{vehiculo.matricula}}</h2>
-          <div>
-            <p>{{vehiculo.matricula|safe}}</p>
-            <p>{{vehiculo.marca|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.modelo|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.color|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.kilometros|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.bastidor|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.asegurado|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.aseguradora|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.num_poliza|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.tipo_motor|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.placa_oval|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.observaciones|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.created|striptags|safe|truncatechars:"200"}}</p>
-            <p>{{vehiculo.updated|striptags|safe|truncatechars:"200"}}</p>
-          </div>
-        </div>
-      {% endfor %}
-      """
-    -->
   </div>
 </main>
 {% endblock %}

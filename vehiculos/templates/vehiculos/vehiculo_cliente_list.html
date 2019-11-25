@@ -1,0 +1,34 @@
+{% extends 'core/base_real.html' %}
+{% load static %}
+{% block title %}Vehículos{% endblock %}
+{% block content %}
+
+<main role="main">
+	<div>
+	<!--	<form method="GET">
+		#	{{filter.form}}
+			<button type="submit" class="btn btn-primary">Buscar</button>
+		</form>
+	-->
+		<ul>
+			<th>matricula</th>
+			<th>marca</th>
+			<th>modelo</th>
+			{% for vehiculo in filter.qs %}
+				<div>
+					<td></td>
+					<td>{{vehiculo.cliente.dni}}</td>
+					<td>{{vehiculo.matricula}}</td>
+					<td>{{vehiculo.marca}}</td>
+					<td>{{vehiculo.modelo}}</td>
+					<td><a href="{% url 'vehiculos:editar' vehiculo.matricula %}">Editar</a></td>
+					<td><a href="{% url 'vehiculos:detalle' vehiculo.id %}">Detalle</a></td>
+					<td><a href="{% url 'vehiculos:ordenreparacion' vehiculo.id %}">O.R.</a></td>
+					<td><a href="{% url 'vehiculos:historial' vehiculo.id %}">Historial</a></td>
+
+				</div>
+			{% endfor %}
+		</ul>
+	</div>
+</main>
+{% endblock %}
